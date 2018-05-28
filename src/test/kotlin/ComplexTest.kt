@@ -1,8 +1,8 @@
-package komplex
+package complex
 
-import complex.Complex
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import kotlin.math.PI
 
 class ComplexTest {
 
@@ -10,7 +10,7 @@ class ComplexTest {
     fun testComplex() {
         val c1  = Complex(2.0, -3.1)
         Assertions.assertEquals("2.0000 - 3.1000i", c1.toString())
-        val c2 = -c1;
+        val c2 = -c1
         Assertions.assertEquals("-2.0000 + 3.1000i", c2.toString())
 
         val c3 = Complex(-5.0, 2.0)
@@ -62,4 +62,19 @@ class ComplexTest {
         val c2 = c1/0
         println(c2)
     }
+
+    @Test
+    fun testNorm() {
+        val c1  = Complex(3.0, -4.0)
+        Assertions.assertEquals(5.0, c1.abs())
+        Assertions.assertEquals(5.0, abs(c1))
+    }
+
+    @Test
+    fun testExp() {
+        val c1 = Complex(0.0, PI)
+        val c2 = exp(c1)
+        Assertions.assertEquals("-1.0000 + 0.0000i", c2.toString())
+    }
+
 }
