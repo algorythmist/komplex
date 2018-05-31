@@ -7,6 +7,9 @@ import kotlin.math.sqrt
 import kotlin.math.atan
 import kotlin.math.ln
 
+val ONE = Complex(1.0,0.0)
+val i = Complex(0.0,1.0)
+
 fun abs(c: Complex): Double = c.abs()
 
 fun exp(c: Complex): Complex {
@@ -21,6 +24,16 @@ fun cosh(c: Complex) = (exp(c) + exp(-c))/2
 fun tanh(c: Complex) = sinh(c) / cosh(c)
 
 fun coth(c: Complex) =  cosh(c) / sinh(c)
+
+fun cos(c: Complex) = (exp(i*c) + exp(-i*c)) / 2.0
+
+fun sin(c: Complex) = i *(exp(-i*c) - exp(i*c)) / 2.0
+
+fun tan(c: Complex) = sin(c) / cos(c)
+
+fun cot(c: Complex) = cos(c) / sin(c)
+
+fun sec(c: Complex) =  ONE / cos(c)
 
 /**
  * The natural logarithm on the principal branch
