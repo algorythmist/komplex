@@ -116,6 +116,13 @@ class ComplexTest {
         assertEquals(-0.6421481, z.real, 0.0001)
         assertEquals(1.068607, z.img, 0.0001)
 
+        z = c3.pow(2.3)
+        assertEquals(3.07625065, z.real, 0.0001)
+        assertEquals(-5.5725305, z.img, 0.0001)
+
+        z = c3.pow(i)
+        assertEquals(1.1022736, z.real, 0.0001)
+        assertEquals(1.1457119, z.img, 0.0001)
     }
 
 }

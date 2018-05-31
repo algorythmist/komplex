@@ -6,6 +6,8 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.atan
 import kotlin.math.ln
+import kotlin.math.pow
+
 
 val ONE = Complex(1.0,0.0)
 val i = Complex(0.0,1.0)
@@ -80,6 +82,18 @@ class Complex(val real: Double, val img: Double) {
     fun abs(): Double = sqrt(this.normSquared())
 
     fun phase(): Double = atan(img/real)
+
+    fun pow(a: Double) : Complex {
+       return exp(ln(this)*a)
+    }
+
+    fun pow(a: Int) : Complex {
+        return exp(ln(this)*a)
+    }
+
+    fun pow(a: Complex) : Complex {
+        return exp(ln(this)*a)
+    }
 
     override fun toString(): String {
         if (img < 0) {
