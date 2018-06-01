@@ -1,9 +1,11 @@
-package complex
+package complex.test
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.math.PI
+import complex.Complex
+import complex.*
 
 class ComplexTest {
 
@@ -17,6 +19,8 @@ class ComplexTest {
 
         c2 = i * PI
         assertEquals(c2, Complex(0.0, PI))
+
+        c2 = c1*5.0 + i*PI
     }
 
     @Test
