@@ -61,7 +61,11 @@ class Complex(val real: Double, val img: Double) {
 
     operator fun plus(c: Complex) = Complex(real + c.real, img + c.img)
 
+    operator fun plus(n : Number) = Complex(real + n.toDouble(), img)
+
     operator fun minus(c: Complex) = Complex(real - c.real, img - c.img)
+
+    operator fun minus(n : Number) = Complex(real - n.toDouble(), img )
 
     operator fun times(c: Complex) = Complex(real * c.real - img * c.img, real * c.img + img * c.real)
 
