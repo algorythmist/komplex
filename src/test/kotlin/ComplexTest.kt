@@ -55,6 +55,8 @@ class ComplexTest {
         c2 = c1 * 0
         assertEquals(0.0, c2.real)
         assertEquals(0.0, c2.img, 0.001)
+
+        assertEquals(ONE, i*(-i))
     }
 
     @Test
@@ -67,6 +69,8 @@ class ComplexTest {
         c2 = c1 / Complex(-1.0, 1.0)
         assertEquals(-2.75, c2.real)
         assertEquals(-0.25, c2.img)
+
+
     }
 
     @Test

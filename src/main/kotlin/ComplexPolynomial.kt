@@ -16,7 +16,8 @@ class ComplexPolynomial(val coefficients: Array<Complex>) {
 
     fun order() = coefficients.size - 1
 
-    //TODO display as poly
+    operator fun get(i : Int) = coefficients[i]
+
     override fun toString(): String {
         fun coefficientToString(i : Int) : String {
            val s =  "("+coefficients[i].toString()+")"
@@ -30,6 +31,12 @@ class ComplexPolynomial(val coefficients: Array<Complex>) {
         }
         return (0 until coefficients.size).map { i -> coefficientToString(i) }.joinToString(separator = "+")
     }
+
+    operator fun unaryMinus() = ComplexPolynomial(coefficients.map { c -> -c }.toTypedArray())
+
+    operator fun times(n : Number) = ComplexPolynomial(coefficients.map { c -> c * n }.toTypedArray())
+
+    operator fun times(z : Complex) = ComplexPolynomial(coefficients.map { c -> c * z }.toTypedArray())
 
     operator fun plus(other: ComplexPolynomial): ComplexPolynomial {
 

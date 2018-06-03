@@ -22,6 +22,30 @@ class ComplexPolynomialTest {
     }
 
     @Test
+    fun testUnaryMinus() {
+        val coefficients = arrayOf(i, i+1, i*2)
+        val p = -ComplexPolynomial(coefficients)
+        assertEquals(-i, p[0])
+        assertEquals(-i-1, p[1])
+        assertEquals(-i*2, p[2])
+    }
+
+    @Test
+    fun testTimesConstant() {
+        val coefficients = arrayOf(i, i+1, i*2)
+        val p = ComplexPolynomial(coefficients) * -2
+        assertEquals(-i*2, p[0])
+        assertEquals(-i*2 - 2, p[1])
+        assertEquals(-i*4, p[2])
+
+        val p2 = p * i
+        assertEquals(Complex(2.0, 0.0), p2[0])
+        assertEquals( -i*2 + 2, p2[1])
+        assertEquals(Complex(4.0, 0.0), p2[2])
+
+    }
+
+    @Test
     fun testAddSubtract() {
         val p1 = ComplexPolynomial(arrayOf(Complex(1.0, 1.0), i, Complex(1.0, 0.0)))
         val p2 = ComplexPolynomial(arrayOf(ONE, i * 2 + 1, i, i - 2))
