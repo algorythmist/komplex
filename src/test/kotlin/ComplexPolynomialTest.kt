@@ -60,4 +60,12 @@ class ComplexPolynomialTest {
         println(p4)
 
     }
+
+    @Test
+    fun testMultiply() {
+        val p1 = ComplexPolynomial(arrayOf(Complex.fromReal(1.0), Complex.fromReal(2.0), Complex.fromReal(-1.0)))
+        val p2 = ComplexPolynomial(arrayOf(Complex.fromInt(2), Complex.fromInt(1)))
+        val p = p1 * p2
+        println(p)
+    }
 }

@@ -73,4 +73,16 @@ class ComplexPolynomial(val coefficients: Array<Complex>) {
         val coeff = Array(maxOrder + 1, { i -> subtractCoefficient(i) })
         return ComplexPolynomial(coeff)
     }
+
+    operator fun times(other : ComplexPolynomial) : ComplexPolynomial {
+        val resultOrder = order() + other.order()
+
+        val coeff = Array(resultOrder+1, { i-> Complex.fromInt(0)})
+        for (k in 0 until coefficients.size) {
+            for (j in 0 until other.coefficients.size) {
+                coeff[k+j] += coefficients[k] * other.coefficients[j]
+            }
+        }
+        return ComplexPolynomial(coeff)
+    }
 }

@@ -106,4 +106,10 @@ class Complex(val real: Double, val img: Double) {
         return "%.4f + %.4fi".format(real, img)
     }
 
+    companion object {
+        fun fromReal(r : Double) = Complex(r, 0.0)
+
+        fun fromInt(i : Int) = Complex(i.toDouble(), 0.0)
+    }
+
 }
