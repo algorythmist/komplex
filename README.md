@@ -5,9 +5,11 @@ It uses operator overloading to make the expression look
 as similar to mathemetical formulas as possible
 
 ```kotlin
+import complex.*
+
  val c1 = Complex(2.0, -3.1)
- var c2 = c1*5.0 + i*PI 
-        
+ val c2 = 2 + 3*i
+ val c3 = 5*c1 + i*PI
 ```
 
 All the standard special functions are defined:

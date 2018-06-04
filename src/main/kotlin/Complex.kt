@@ -42,6 +42,12 @@ fun sec(c: Complex) =  ONE / cos(c)
  */
 fun ln(c: Complex) = Complex(ln(c.abs()), c.phase())
 
+operator fun Number.plus(c: Complex) = Complex(this.toDouble() + c.real, c.img)
+
+operator fun Number.minus(c: Complex) = Complex(this.toDouble() - c.real, -c.img)
+
+operator fun Number.times(c : Complex) = Complex(this.toDouble()* c.real, this.toDouble() * c.img)
+
 /**
  * Defines complex numbers and their algebraic operations
  */
