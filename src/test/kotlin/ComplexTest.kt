@@ -81,7 +81,8 @@ class ComplexTest {
     fun testDivideByZero() {
         val c1 = Complex(3.0, -2.5)
         val c2 = c1 / 0
-        println(c2) //TODO
+        assertEquals(Double.POSITIVE_INFINITY, c2.real)
+         assertEquals(Double.NEGATIVE_INFINITY, c2.img)
     }
 
     @Test

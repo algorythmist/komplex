@@ -8,7 +8,7 @@ import kotlin.math.atan
 import kotlin.math.ln
 import kotlin.math.pow
 
-
+val ZERO = Complex(0.0, 0.0)
 val ONE = Complex(1.0,0.0)
 val i = Complex(0.0,1.0)
 

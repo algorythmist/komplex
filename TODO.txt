@@ -1,0 +1,5 @@
+- complex sqrt
+- roots of unity
+- create polynomial with varargs constructor
+- analytic functions
+- FFT
