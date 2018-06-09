@@ -61,10 +61,22 @@ class ComplexPolynomialTest {
 
     @Test
     fun testMultiply() {
-        val p1 = ComplexPolynomial(arrayOf(Complex.fromReal(1.0), Complex.fromReal(2.0), Complex.fromReal(-1.0)))
-        val p2 = ComplexPolynomial(arrayOf(Complex.fromInt(2), i))
+        val p1 = ComplexPolynomial(arrayOf(Complex.fromNumber(1.0), Complex.fromNumber(2.0), Complex.fromNumber(-1.0)))
+        val p2 = ComplexPolynomial(arrayOf(Complex.fromNumber(2), i))
         val p = p1 * p2
         verifyCoefficients(listOf(2 + 0 * i, 4 + i, -2 + 2 * i, -i), p)
+    }
+
+    @Test
+    fun testConstant() {
+        val zero = ComplexPolynomial.ZERO;
+        assertEquals("(0.0000 + 0.0000i)", zero.toString())
+
+        var p1 = ComplexPolynomial.constant(2)
+        assertEquals("(2.0000 + 0.0000i)", p1.toString())
+
+        var p2 = ComplexPolynomial.constant(2+i)
+        assertEquals("(2.0000 + 1.0000i)", p2.toString())
     }
 
     private fun verifyCoefficients(expected: List<Complex>, p: ComplexPolynomial) {

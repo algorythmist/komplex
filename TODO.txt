@@ -1,3 +1,5 @@
+- polynomial division
+- polynomial times number/complex
 - complex sqrt
 - roots of unity
 - create polynomial with varargs constructor

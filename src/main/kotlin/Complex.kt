@@ -113,9 +113,7 @@ class Complex(val real: Double, val img: Double) {
     }
 
     companion object {
-        fun fromReal(r : Double) = Complex(r, 0.0)
-
-        fun fromInt(i : Int) = Complex(i.toDouble(), 0.0)
+        fun fromNumber(n : Number) = Complex(n.toDouble(), 0.0)
     }
 
 }

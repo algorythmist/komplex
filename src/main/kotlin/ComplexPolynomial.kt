@@ -3,6 +3,14 @@ package complex
 class ComplexPolynomial(val coefficients: Array<Complex>) {
     //TODO test that last coefficient is not zero
 
+    companion object {
+        val ZERO = ComplexPolynomial(arrayOf(complex.ZERO))
+
+        fun constant(c : Complex) = ComplexPolynomial(arrayOf(c))
+
+        fun constant(n : Number) = ComplexPolynomial(arrayOf(Complex.fromNumber(n)))
+    }
+
     fun value(x: Complex): Complex {
         var powx = x
         var v = coefficients[0]
@@ -77,7 +85,7 @@ class ComplexPolynomial(val coefficients: Array<Complex>) {
     operator fun times(other : ComplexPolynomial) : ComplexPolynomial {
         val resultOrder = order() + other.order()
 
-        val coeff = Array(resultOrder+1, { i-> Complex.fromInt(0)})
+        val coeff = Array(resultOrder+1, { _ -> Complex.fromNumber(0)})
         for (k in 0 until coefficients.size) {
             for (j in 0 until other.coefficients.size) {
                 coeff[k+j] += coefficients[k] * other.coefficients[j]
