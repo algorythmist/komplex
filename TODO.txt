@@ -5,3 +5,4 @@
 - create polynomial with varargs constructor
 - analytic functions
 - FFT
+- eliminate 0 coefficients from toString

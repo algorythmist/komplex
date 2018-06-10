@@ -116,4 +116,8 @@ class Complex(val real: Double, val img: Double) {
         fun fromNumber(n : Number) = Complex(n.toDouble(), 0.0)
     }
 
+    fun izZero(tolerance : Double) : Boolean {
+        return this.abs() < tolerance
+    }
+
 }
