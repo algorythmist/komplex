@@ -1,36 +1,33 @@
 package complex
 
 
-class ComplexPolynomial(val coeff: Array<Complex>) {
+class ComplexPolynomial(vararg coeff: Complex) {
 
     private val TOLERANCE: Double = 0.00001
 
-    val coefficients = create(coeff)
+    val coefficients = create(arrayOf(*coeff))
 
 
     private fun create(coeff: Array<Complex>): Array<Complex> {
         var n = coeff.size
-        while ((n > 1) && coeff[n - 1].izZero(TOLERANCE)) {
-            --n;
-        }
+        while ((n > 1) && coeff[n - 1].izZero(TOLERANCE)) --n
         return coeff.sliceArray(IntRange(0, n - 1))
     }
 
-
     companion object {
-        val ZERO = ComplexPolynomial(arrayOf(complex.ZERO))
+        val ZERO = ComplexPolynomial(complex.ZERO)
 
-        fun constant(c: Complex) = ComplexPolynomial(arrayOf(c))
+        fun constant(c: Complex) = ComplexPolynomial(c)
 
-        fun constant(n: Number) = ComplexPolynomial(arrayOf(Complex.fromNumber(n)))
+        fun constant(n: Number) = ComplexPolynomial(Complex.fromNumber(n))
 
         fun monomial(degree: Int, coefficient: Complex): ComplexPolynomial {
             val a = Array<Complex>(degree + 1, { _ -> complex.ZERO })
             a[degree] = coefficient
-            return ComplexPolynomial(a)
+            return ComplexPolynomial(*a)
         }
 
-        fun of(a: DoubleArray) = ComplexPolynomial(a.map { n -> Complex.fromNumber(n) }.toTypedArray())
+        fun of(a: DoubleArray) = ComplexPolynomial(*(a.map { n -> Complex.fromNumber(n) }.toTypedArray()))
     }
 
     override fun equals(other: Any?): Boolean {
@@ -72,11 +69,16 @@ class ComplexPolynomial(val coeff: Array<Complex>) {
         return (0 until coefficients.size).map { i -> coefficientToString(i) }.joinToString(separator = "+")
     }
 
-    operator fun unaryMinus() = ComplexPolynomial(coefficients.map { c -> -c }.toTypedArray())
+    operator fun unaryMinus() = ComplexPolynomial(*coefficients.map { c -> -c }.toTypedArray())
 
-    operator fun times(n: Number) = ComplexPolynomial(coefficients.map { c -> c * n }.toTypedArray())
+    operator fun times(n: Number) = ComplexPolynomial(*coefficients.map { c -> c * n }.toTypedArray())
 
-    operator fun times(z: Complex) = ComplexPolynomial(coefficients.map { c -> c * z }.toTypedArray())
+    operator fun times(z: Complex) = ComplexPolynomial(*coefficients.map { c -> c * z }.toTypedArray())
+
+    operator fun div(z : Complex) = ComplexPolynomial(*coefficients.map{c -> c / z}.toTypedArray())
+
+    operator fun div(n : Number) = ComplexPolynomial(*coefficients.map{c -> c / n}.toTypedArray())
+
 
     operator fun plus(other: ComplexPolynomial): ComplexPolynomial {
 
@@ -93,7 +95,7 @@ class ComplexPolynomial(val coeff: Array<Complex>) {
 
         val maxOrder = maxOf(degree(), other.degree())
         val coeff = Array<Complex>(maxOrder + 1, { i -> addCoefficient(i) })
-        return ComplexPolynomial(coeff)
+        return ComplexPolynomial(*coeff)
     }
 
     operator fun minus(other: ComplexPolynomial): ComplexPolynomial {
@@ -111,7 +113,7 @@ class ComplexPolynomial(val coeff: Array<Complex>) {
 
         val maxOrder = maxOf(degree(), other.degree())
         val coeff = Array(maxOrder + 1, { i -> subtractCoefficient(i) })
-        return ComplexPolynomial(coeff)
+        return ComplexPolynomial(*coeff)
     }
 
     operator fun times(other: ComplexPolynomial): ComplexPolynomial {
@@ -123,6 +125,11 @@ class ComplexPolynomial(val coeff: Array<Complex>) {
                 coeff[k + j] += coefficients[k] * other.coefficients[j]
             }
         }
-        return ComplexPolynomial(coeff)
+        return ComplexPolynomial(*coeff)
     }
+
+    operator fun div(other : ComplexPolynomial) : Pair<ComplexPolynomial, ComplexPolynomial> {
+        return complex.divide(this, other)
+    }
+
 }

@@ -1,5 +1,4 @@
-- polynomial division
-- polynomial times number/complex
+- better polynomial toString
 - complex sqrt
 - roots of unity
 - create polynomial with varargs constructor
