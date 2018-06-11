@@ -106,10 +106,7 @@ class Complex(val real: Double, val img: Double) {
     }
 
     override fun toString(): String {
-        if (img < 0) {
-            return "%.4f - %.4fi".format(real, -img)
-        }
-        return "%.4f + %.4fi".format(real, img)
+        return if (img < 0)  "%.4f - %.4fi".format(real, -img) else "%.4f + %.4fi".format(real, img)
     }
 
     companion object {

@@ -1,4 +1,6 @@
+- better complex toString
 - better polynomial toString
+- fix polynomial equals/hashCode
 - complex sqrt
 - roots of unity
 - create polynomial with varargs constructor

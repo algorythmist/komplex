@@ -8,7 +8,6 @@ import complex.*
 
 class ComplexTest {
 
-
     @Test
     fun testEquals() {
         val c1 = Complex(2.0, -3.1)

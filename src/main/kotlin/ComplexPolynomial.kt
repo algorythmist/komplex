@@ -1,13 +1,16 @@
 package complex
 
-
+/**
+ * a complex polynomial of the form c[0] + c[1]z + c[2]z^2 + ...
+ * where the c's are complex numbers
+ */
 class ComplexPolynomial(vararg coeff: Complex) {
 
     private val TOLERANCE: Double = 0.00001
 
-    val coefficients = create(arrayOf(*coeff))
+    private val coefficients = create(arrayOf(*coeff))
 
-
+    //discard 0 coefficients from the right
     private fun create(coeff: Array<Complex>): Array<Complex> {
         var n = coeff.size
         while ((n > 1) && coeff[n - 1].izZero(TOLERANCE)) --n
@@ -27,7 +30,7 @@ class ComplexPolynomial(vararg coeff: Complex) {
             return ComplexPolynomial(*a)
         }
 
-        fun of(a: DoubleArray) = ComplexPolynomial(*(a.map { n -> Complex.fromNumber(n) }.toTypedArray()))
+        fun of(a: DoubleArray) = ComplexPolynomial(*(a.map { Complex.fromNumber(it) }.toTypedArray()))
     }
 
     override fun equals(other: Any?): Boolean {
@@ -58,15 +61,15 @@ class ComplexPolynomial(vararg coeff: Complex) {
     override fun toString(): String {
         fun coefficientToString(i: Int): String {
             val s = "(" + coefficients[i].toString() + ")"
-            if (i == 0) {
-                return s
+            return when (i) {
+                0 -> s
+                1 -> s + "z"
+                else -> s + "z^" + i.toString()
             }
-            if (i == 1) {
-                return s + "z"
-            }
-            return s + "z^" + i.toString()
+
+
         }
-        return (0 until coefficients.size).map { i -> coefficientToString(i) }.joinToString(separator = "+")
+        return (0 until coefficients.size).map { coefficientToString(it) }.joinToString(separator = "+")
     }
 
     operator fun unaryMinus() = ComplexPolynomial(*coefficients.map { c -> -c }.toTypedArray())
@@ -75,22 +78,19 @@ class ComplexPolynomial(vararg coeff: Complex) {
 
     operator fun times(z: Complex) = ComplexPolynomial(*coefficients.map { c -> c * z }.toTypedArray())
 
-    operator fun div(z : Complex) = ComplexPolynomial(*coefficients.map{c -> c / z}.toTypedArray())
+    operator fun div(z: Complex) = ComplexPolynomial(*coefficients.map { c -> c / z }.toTypedArray())
 
-    operator fun div(n : Number) = ComplexPolynomial(*coefficients.map{c -> c / n}.toTypedArray())
+    operator fun div(n: Number) = ComplexPolynomial(*coefficients.map { c -> c / n }.toTypedArray())
 
 
     operator fun plus(other: ComplexPolynomial): ComplexPolynomial {
 
         fun addCoefficient(i: Int): Complex {
-            if (i > this.degree()) {
-                return other.coefficients[i]
+            return when {
+                i > this.degree() -> other.coefficients[i]
+                i > other.degree() -> coefficients[i]
+                else -> coefficients[i] + other.coefficients[i]
             }
-            if (i > other.degree()) {
-                return coefficients[i]
-            }
-            return coefficients[i] + other.coefficients[i]
-
         }
 
         val maxOrder = maxOf(degree(), other.degree())
@@ -112,7 +112,7 @@ class ComplexPolynomial(vararg coeff: Complex) {
         }
 
         val maxOrder = maxOf(degree(), other.degree())
-        val coeff = Array(maxOrder + 1, { i -> subtractCoefficient(i) })
+        val coeff = Array(maxOrder + 1, { subtractCoefficient(it) })
         return ComplexPolynomial(*coeff)
     }
 
@@ -128,7 +128,7 @@ class ComplexPolynomial(vararg coeff: Complex) {
         return ComplexPolynomial(*coeff)
     }
 
-    operator fun div(other : ComplexPolynomial) : Pair<ComplexPolynomial, ComplexPolynomial> {
+    operator fun div(other: ComplexPolynomial): Pair<ComplexPolynomial, ComplexPolynomial> {
         return complex.divide(this, other)
     }
 
