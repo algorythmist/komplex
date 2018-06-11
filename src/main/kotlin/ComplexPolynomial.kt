@@ -56,6 +56,9 @@ class ComplexPolynomial(vararg coeff: Complex) {
 
     fun degree() = coefficients.size - 1
 
+    /**
+     * Access the ith coefficient
+     */
     operator fun get(i: Int) = coefficients[i]
 
     override fun toString(): String {
@@ -66,8 +69,6 @@ class ComplexPolynomial(vararg coeff: Complex) {
                 1 -> s + "z"
                 else -> s + "z^" + i.toString()
             }
-
-
         }
         return (0 until coefficients.size).map { coefficientToString(it) }.joinToString(separator = "+")
     }
@@ -94,21 +95,18 @@ class ComplexPolynomial(vararg coeff: Complex) {
         }
 
         val maxOrder = maxOf(degree(), other.degree())
-        val coeff = Array<Complex>(maxOrder + 1, { i -> addCoefficient(i) })
+        val coeff = Array<Complex>(maxOrder + 1, { addCoefficient(it) })
         return ComplexPolynomial(*coeff)
     }
 
     operator fun minus(other: ComplexPolynomial): ComplexPolynomial {
 
         fun subtractCoefficient(i: Int): Complex {
-            if (i > degree()) {
-                return -other.coefficients[i]
+            return when {
+                i > degree() -> -other.coefficients[i]
+                i > other.degree() -> coefficients[i]
+                else -> coefficients[i] - other.coefficients[i]
             }
-            if (i > other.degree()) {
-                return coefficients[i]
-            }
-            return coefficients[i] - other.coefficients[i]
-
         }
 
         val maxOrder = maxOf(degree(), other.degree())

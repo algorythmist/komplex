@@ -1,9 +1,9 @@
 - better complex toString
 - better polynomial toString
 - fix polynomial equals/hashCode
+- polynomial gcd
 - complex sqrt
-- roots of unity
-- create polynomial with varargs constructor
-- analytic functions
+- eliminate 0 coefficients from toString in polynomials
 - FFT
-- eliminate 0 coefficients from toString
+- roots of unity
+- analytic functions
