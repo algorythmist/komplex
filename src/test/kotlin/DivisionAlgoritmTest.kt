@@ -16,4 +16,13 @@ class DivisionAlgoritmTest {
 
         assertEquals(dividend,  divisor * quotient + remainder)
     }
+
+
+    @Test
+    fun testGcd() {
+        val f = ComplexPolynomial.of(doubleArrayOf(-1.0, 0.0, 0.0, 0.0, 1.0))
+        val g = ComplexPolynomial.of(doubleArrayOf(-1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0))
+        val gcd = complex.gcd(f, g)
+        assertEquals("(-1.0000 + 0.0000i)+(0.0000 + 0.0000i)z+(1.0000 + 0.0000i)z^2", gcd.toString())
+    }
 }

@@ -1,7 +1,6 @@
 - better complex toString
 - better polynomial toString
 - fix polynomial equals/hashCode
-- polynomial gcd
 - complex sqrt
 - eliminate 0 coefficients from toString in polynomials
 - FFT

@@ -17,6 +17,9 @@ class ComplexPolynomial(vararg coeff: Complex) {
         return coeff.sliceArray(IntRange(0, n - 1))
     }
 
+    constructor(cp : ComplexPolynomial) : this(*cp.coefficients)
+
+
     companion object {
         val ZERO = ComplexPolynomial(complex.ZERO)
 

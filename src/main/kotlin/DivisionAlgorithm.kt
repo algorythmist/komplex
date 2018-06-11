@@ -22,11 +22,23 @@ fun divide(dividend: ComplexPolynomial,
     return Pair(quotient, remainder)
 }
 
+fun gcd(f: ComplexPolynomial,
+        g: ComplexPolynomial): ComplexPolynomial {
+    var gcd = ComplexPolynomial(f)
+    var s = ComplexPolynomial(g)
+    while (!isZero(s)) {
+        val remainder = (gcd / s).second
+        gcd = s
+        s = remainder
+    }
+    return gcd
+}
+
 /**
  * Check if the instance is the null polynomial.
  *
  * @return true if the polynomial is null
  */
-fun isZero(p: ComplexPolynomial): Boolean {
+private fun isZero(p: ComplexPolynomial): Boolean {
     return p.degree() == 0 && p[0] == complex.ZERO // TODO zero comparison
 }
