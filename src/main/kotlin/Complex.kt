@@ -106,14 +106,18 @@ class Complex(val real: Double, val img: Double) {
     }
 
     override fun toString(): String {
-        return if (img < 0)  "%.4f - %.4fi".format(real, -img) else "%.4f + %.4fi".format(real, img)
+        return when {
+            img == 0.0 -> "%.4f".format(real)
+            real == 0.0 -> "%.4fi".format(img)
+            img < 0 ->  "%.4f - %.4fi".format(real, -img)
+            else -> "%.4f + %.4fi".format(real, img)}
     }
 
     companion object {
         fun fromNumber(n : Number) = Complex(n.toDouble(), 0.0)
     }
 
-    fun izZero(tolerance : Double) : Boolean {
+    fun isZero(tolerance : Double) : Boolean {
         return this.abs() < tolerance
     }
 

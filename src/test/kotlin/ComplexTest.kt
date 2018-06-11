@@ -26,6 +26,24 @@ class ComplexTest {
     }
 
     @Test
+    fun testToString() {
+        var c1 = Complex(2.0, -3.1)
+        assertEquals("2.0000 - 3.1000i", c1.toString())
+
+        c1 = Complex(2.0, 0.0)
+        assertEquals("2.0000", c1.toString())
+
+        c1 = Complex(0.0, -3.1)
+        assertEquals("-3.1000i", c1.toString())
+
+        c1 = Complex(0.0, 2.5)
+        assertEquals("2.5000i", c1.toString())
+
+        c1 = Complex(0.0, 0.0)
+        assertEquals("0.0000", c1.toString())
+    }
+
+    @Test
     fun testAdditionSubtraction() {
         val c1 = Complex(2.0, -3.1)
         assertEquals("2.0000 - 3.1000i", c1.toString())

@@ -11,7 +11,7 @@ class ComplexPolynomialTest {
     fun testZeroCoefficients() {
         val p = ComplexPolynomial(complex.ONE, complex.ZERO, i, Complex(0.0, 0.0))
         assertEquals(2, p.degree())
-        assertEquals("(1.0000 + 0.0000i)+(0.0000 + 0.0000i)z+(0.0000 + 1.0000i)z^2", p.toString())
+        assertEquals("(1.0000)+(1.0000i)z^2", p.toString())
     }
 
     @Test
@@ -74,10 +74,10 @@ class ComplexPolynomialTest {
     @Test
     fun testConstant() {
         val zero = ComplexPolynomial.ZERO
-        assertEquals("(0.0000 + 0.0000i)", zero.toString())
+        assertEquals("0", zero.toString())
 
         val p1 = ComplexPolynomial.constant(2)
-        assertEquals("(2.0000 + 0.0000i)", p1.toString())
+        assertEquals("(2.0000)", p1.toString())
 
         val p2 = ComplexPolynomial.constant(2+i)
         assertEquals("(2.0000 + 1.0000i)", p2.toString())
@@ -88,11 +88,11 @@ class ComplexPolynomialTest {
         val p1 = ComplexPolynomial(complex.ONE, complex.ZERO, complex.ONE)
         val p2 = ComplexPolynomial(i, complex.ONE)
         val (q, r) = p1/p2
-        assertEquals("(0.0000 - 1.0000i)+(1.0000 + 0.0000i)z", q.toString())
+        assertEquals("(-1.0000i)+(1.0000)z", q.toString())
         assertEquals(ComplexPolynomial.ZERO, r)
 
         val p3 = p2 / i
-        assertEquals("(1.0000 + 0.0000i)+(0.0000 - 1.0000i)z", p3.toString())
+        assertEquals("(1.0000)+(-1.0000i)z", p3.toString())
     }
 
     private fun verifyCoefficients(expected: List<Complex>, p: ComplexPolynomial) {

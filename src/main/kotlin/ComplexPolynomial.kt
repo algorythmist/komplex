@@ -13,7 +13,7 @@ class ComplexPolynomial(vararg coeff: Complex) {
     //discard 0 coefficients from the right
     private fun create(coeff: Array<Complex>): Array<Complex> {
         var n = coeff.size
-        while ((n > 1) && coeff[n - 1].izZero(TOLERANCE)) --n
+        while ((n > 1) && coeff[n - 1].isZero(TOLERANCE)) --n
         return coeff.sliceArray(IntRange(0, n - 1))
     }
 
@@ -36,12 +36,14 @@ class ComplexPolynomial(vararg coeff: Complex) {
         fun of(a: DoubleArray) = ComplexPolynomial(*(a.map { Complex.fromNumber(it) }.toTypedArray()))
     }
 
+    //TODO implement without string repr
     override fun equals(other: Any?): Boolean {
         if (other == null || other !is ComplexPolynomial)
             return false
         return this.toString() == other.toString()
     }
 
+    //TODO implement without string repr
     override fun hashCode(): Int {
         return this.toString().hashCode()
     }
@@ -65,15 +67,22 @@ class ComplexPolynomial(vararg coeff: Complex) {
     operator fun get(i: Int) = coefficients[i]
 
     override fun toString(): String {
+
+        if (this.isZero()) return "0"
+
         fun coefficientToString(i: Int): String {
-            val s = "(" + coefficients[i].toString() + ")"
+            if (coefficients[i].isZero(0.00001)) {
+                return ""
+            }
+            val s = "(${coefficients[i]})"
             return when (i) {
                 0 -> s
                 1 -> s + "z"
                 else -> s + "z^" + i.toString()
             }
         }
-        return (0 until coefficients.size).map { coefficientToString(it) }.joinToString(separator = "+")
+
+        return (0 until coefficients.size).map { coefficientToString(it) }.filter{ !it.isEmpty()}.joinToString(separator = "+")
     }
 
     operator fun unaryMinus() = ComplexPolynomial(*coefficients.map { c -> -c }.toTypedArray())
@@ -132,5 +141,7 @@ class ComplexPolynomial(vararg coeff: Complex) {
     operator fun div(other: ComplexPolynomial): Pair<ComplexPolynomial, ComplexPolynomial> {
         return complex.divide(this, other)
     }
+
+    private fun isZero() = degree() == 0 && coefficients[0].isZero(TOLERANCE)
 
 }
