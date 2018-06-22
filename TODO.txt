@@ -2,7 +2,6 @@
 - better polynomial toString
 - fix polynomial equals/hashCode
 - complex sqrt
-- eliminate 0 coefficients from toString in polynomials
 - FFT
 - roots of unity
-- analytic functions
+- analytic functions (?)
