@@ -1,7 +1,7 @@
-- better complex toString
+- better komplex toString
 - better polynomial toString
 - fix polynomial equals/hashCode
-- complex sqrt
+- komplex sqrt
 - FFT
 - roots of unity
 - analytic functions (?)

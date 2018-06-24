@@ -1,4 +1,4 @@
-package complex
+package komplex
 
 import kotlin.math.cos
 import kotlin.math.exp
@@ -6,7 +6,6 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.atan
 import kotlin.math.ln
-import kotlin.math.pow
 
 val ZERO = Complex(0.0, 0.0)
 val ONE = Complex(1.0,0.0)
@@ -49,7 +48,7 @@ operator fun Number.minus(c: Complex) = Complex(this.toDouble() - c.real, -c.img
 operator fun Number.times(c : Complex) = Complex(this.toDouble()* c.real, this.toDouble() * c.img)
 
 /**
- * Defines complex numbers and their algebraic operations
+ * Defines komplex numbers and their algebraic operations
  */
 class Complex(val real: Double, val img: Double) {
 

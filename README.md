@@ -5,7 +5,7 @@ It uses operator overloading to make the expression look
 as similar to mathemetical formulas as possible
 
 ```kotlin
-import complex.*
+import komplex.*
 
  val c1 = Complex(2.0, -3.1)
  val c2 = 2 + 3*i
