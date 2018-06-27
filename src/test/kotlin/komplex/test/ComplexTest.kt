@@ -1,10 +1,10 @@
 package komplex.test
 
+import komplex.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.math.PI
-import komplex.*
 
 class ComplexTest {
 
@@ -18,10 +18,10 @@ class ComplexTest {
         c2 = i * PI
         assertEquals(c2, Complex(0.0, PI))
 
-        c2 = 4 + 5*i
+        c2 = 4 + 5 * i
         assertEquals(Complex(4.0, 5.0), c2)
 
-        c2 = 3 - 2*i
+        c2 = 3 - 2 * i
         assertEquals(Complex(3.0, -2.0), c2)
     }
 
@@ -77,7 +77,7 @@ class ComplexTest {
         assertEquals(0.0, c2.real)
         assertEquals(0.0, c2.img, 0.001)
 
-        assertEquals(ONE, i*(-i))
+        assertEquals(ONE, i * (-i))
     }
 
     @Test
@@ -99,7 +99,7 @@ class ComplexTest {
         val c1 = Complex(3.0, -2.5)
         val c2 = c1 / 0
         assertEquals(Double.POSITIVE_INFINITY, c2.real)
-         assertEquals(Double.NEGATIVE_INFINITY, c2.img)
+        assertEquals(Double.NEGATIVE_INFINITY, c2.img)
     }
 
     @Test

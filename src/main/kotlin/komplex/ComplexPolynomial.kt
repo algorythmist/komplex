@@ -17,7 +17,7 @@ class ComplexPolynomial(vararg coeff: Complex) {
         return coeff.sliceArray(IntRange(0, n - 1))
     }
 
-    constructor(cp : ComplexPolynomial) : this(*cp.coefficients)
+    constructor(cp: ComplexPolynomial) : this(*cp.coefficients)
 
 
     companion object {
@@ -82,7 +82,7 @@ class ComplexPolynomial(vararg coeff: Complex) {
             }
         }
 
-        return (0 until coefficients.size).map { coefficientToString(it) }.filter{ !it.isEmpty()}.joinToString(separator = "+")
+        return (0 until coefficients.size).map { coefficientToString(it) }.filter { !it.isEmpty() }.joinToString(separator = "+")
     }
 
     operator fun unaryMinus() = ComplexPolynomial(*coefficients.map { c -> -c }.toTypedArray())

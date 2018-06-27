@@ -16,7 +16,7 @@ fun divide(dividend: ComplexPolynomial,
         val monomial = ComplexPolynomial.monomial(remainderDegree - divisorDegree, c)
 
         remainder -= (monomial * divisor)
-        quotient +=  monomial
+        quotient += monomial
         remainderDegree = remainder.degree()
     }
     return Pair(quotient, remainder)

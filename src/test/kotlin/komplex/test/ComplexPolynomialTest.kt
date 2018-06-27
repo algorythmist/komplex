@@ -79,7 +79,7 @@ class ComplexPolynomialTest {
         val p1 = ComplexPolynomial.constant(2)
         assertEquals("(2.0000)", p1.toString())
 
-        val p2 = ComplexPolynomial.constant(2+i)
+        val p2 = ComplexPolynomial.constant(2 + i)
         assertEquals("(2.0000 + 1.0000i)", p2.toString())
     }
 
@@ -87,7 +87,7 @@ class ComplexPolynomialTest {
     fun testDivide() {
         val p1 = ComplexPolynomial(komplex.ONE, komplex.ZERO, komplex.ONE)
         val p2 = ComplexPolynomial(i, komplex.ONE)
-        val (q, r) = p1/p2
+        val (q, r) = p1 / p2
         assertEquals("(-1.0000i)+(1.0000)z", q.toString())
         assertEquals(ComplexPolynomial.ZERO, r)
 

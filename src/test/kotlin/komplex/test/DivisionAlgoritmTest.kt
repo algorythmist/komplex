@@ -14,7 +14,7 @@ class DivisionAlgoritmTest {
         assertEquals("(0.1250)+(0.7500)z+(0.5000)z^2", quotient.toString())
         assertEquals("(0.8750)", remainder.toString())
 
-        assertEquals(dividend,  divisor * quotient + remainder)
+        assertEquals(dividend, divisor * quotient + remainder)
 
         //TODO use komplex
     }
