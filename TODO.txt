@@ -1,3 +1,4 @@
+- left multiply/add number to polynnomial
 - better komplex toString
 - better polynomial toString
 - fix polynomial equals/hashCode

@@ -95,7 +95,6 @@ class ComplexPolynomial(vararg coeff: Complex) {
 
     operator fun div(n: Number) = ComplexPolynomial(*coefficients.map { c -> c / n }.toTypedArray())
 
-
     operator fun plus(other: ComplexPolynomial): ComplexPolynomial {
 
         fun addCoefficient(i: Int): Complex {
