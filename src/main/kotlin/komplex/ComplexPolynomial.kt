@@ -1,5 +1,9 @@
 package komplex
 
+operator fun Number.times(cp: ComplexPolynomial) = cp * this.toDouble()
+
+operator fun Complex.times(cp: ComplexPolynomial) = cp * this
+
 /**
  * a komplex polynomial of the form c[0] + c[1]z + c[2]z^2 + ...
  * where the c's are komplex numbers
