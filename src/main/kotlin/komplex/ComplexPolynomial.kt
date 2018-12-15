@@ -23,7 +23,6 @@ class ComplexPolynomial(vararg coeff: Complex) {
 
     constructor(cp: ComplexPolynomial) : this(*cp.coefficients)
 
-
     companion object {
         val ZERO = ComplexPolynomial(komplex.ZERO)
 
@@ -63,7 +62,7 @@ class ComplexPolynomial(vararg coeff: Complex) {
 
     }
 
-    fun degree() = coefficients.size - 1
+    val degree get() = coefficients.size - 1
 
     /**
      * Access the ith coefficient
@@ -103,13 +102,13 @@ class ComplexPolynomial(vararg coeff: Complex) {
 
         fun addCoefficient(i: Int): Complex {
             return when {
-                i > this.degree() -> other.coefficients[i]
-                i > other.degree() -> coefficients[i]
+                i > this.degree -> other.coefficients[i]
+                i > other.degree -> coefficients[i]
                 else -> coefficients[i] + other.coefficients[i]
             }
         }
 
-        val maxOrder = maxOf(degree(), other.degree())
+        val maxOrder = maxOf(degree, other.degree)
         val coeff = Array<Complex>(maxOrder + 1, { addCoefficient(it) })
         return ComplexPolynomial(*coeff)
     }
@@ -118,19 +117,19 @@ class ComplexPolynomial(vararg coeff: Complex) {
 
         fun subtractCoefficient(i: Int): Complex {
             return when {
-                i > degree() -> -other.coefficients[i]
-                i > other.degree() -> coefficients[i]
+                i > degree -> -other.coefficients[i]
+                i > other.degree -> coefficients[i]
                 else -> coefficients[i] - other.coefficients[i]
             }
         }
 
-        val maxOrder = maxOf(degree(), other.degree())
+        val maxOrder = maxOf(degree, other.degree)
         val coeff = Array(maxOrder + 1, { subtractCoefficient(it) })
         return ComplexPolynomial(*coeff)
     }
 
     operator fun times(other: ComplexPolynomial): ComplexPolynomial {
-        val resultOrder = degree() + other.degree()
+        val resultOrder = degree + other.degree
 
         val coeff = Array(resultOrder + 1, { _ -> Complex.fromNumber(0) })
         for (k in 0 until coefficients.size) {
@@ -145,6 +144,6 @@ class ComplexPolynomial(vararg coeff: Complex) {
         return komplex.divide(this, other)
     }
 
-    private fun isZero() = degree() == 0 && coefficients[0].isZero(TOLERANCE)
+    private fun isZero() = degree == 0 && coefficients[0].isZero(TOLERANCE)
 
 }

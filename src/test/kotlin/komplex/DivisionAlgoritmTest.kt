@@ -1,4 +1,4 @@
-package komplex.test
+package komplex
 
 import komplex.ComplexPolynomial
 import org.junit.jupiter.api.Assertions.assertEquals

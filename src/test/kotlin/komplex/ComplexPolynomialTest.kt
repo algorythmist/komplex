@@ -1,6 +1,5 @@
-package komplex.test
+package komplex
 
-import komplex.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -10,14 +9,14 @@ class ComplexPolynomialTest {
     @Test
     fun testZeroCoefficients() {
         val p = ComplexPolynomial(komplex.ONE, komplex.ZERO, i, Complex(0.0, 0.0))
-        assertEquals(2, p.degree())
+        assertEquals(2, p.degree)
         assertEquals("(1.0000)+(1.0000i)z^2", p.toString())
     }
 
     @Test
     fun testValue() {
         val p = ComplexPolynomial(Complex(1.0, 1.0), i, Complex(1.0, 0.0))
-        assertEquals(2, p.degree())
+        assertEquals(2, p.degree)
         val z = p.value(Complex(0.0, -1.0))
         assertEquals(1.0, z.real)
         assertEquals(1.0, z.img)
@@ -50,15 +49,15 @@ class ComplexPolynomialTest {
     fun testAddSubtract() {
         val p1 = ComplexPolynomial(1 + i, i, 1 + 0 * i)
         val p2 = ComplexPolynomial(ONE, i * 2 + 1, i, i - 2)
-        assertEquals(2, p1.degree())
-        assertEquals(3, p2.degree())
+        assertEquals(2, p1.degree)
+        assertEquals(3, p2.degree)
         val p3 = p1 + p2
-        assertEquals(3, p3.degree())
+        assertEquals(3, p3.degree)
         assertEquals("(2.0000 + 1.0000i)+(1.0000 + 3.0000i)z+(1.0000 + 1.0000i)z^2+(-2.0000 + 1.0000i)z^3",
                 p3.toString())
 
         val p4 = p2 - p1
-        assertEquals(3, p4.degree())
+        assertEquals(3, p4.degree)
         val expected = listOf<Complex>(-i, 1 + i, -1 + i, -2 + i)
         verifyCoefficients(expected, p4)
     }
@@ -96,8 +95,6 @@ class ComplexPolynomialTest {
     }
 
     private fun verifyCoefficients(expected: List<Complex>, p: ComplexPolynomial) {
-        for (i in 0..p.degree()) {
-            assertEquals(expected[i], p[i])
-        }
+        (0..p.degree).forEach { assertEquals(expected[it], p[it]) }
     }
 }

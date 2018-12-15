@@ -8,8 +8,8 @@ fun divide(dividend: ComplexPolynomial,
 
     var quotient = ComplexPolynomial.ZERO
     var remainder = dividend
-    val divisorDegree = divisor.degree()
-    var remainderDegree = remainder.degree()
+    val divisorDegree = divisor.degree
+    var remainderDegree = remainder.degree
     while (!isZero(remainder) && remainderDegree >= divisorDegree) {
 
         val c = remainder[remainderDegree] / divisor[divisorDegree]
@@ -17,7 +17,7 @@ fun divide(dividend: ComplexPolynomial,
 
         remainder -= (monomial * divisor)
         quotient += monomial
-        remainderDegree = remainder.degree()
+        remainderDegree = remainder.degree
     }
     return Pair(quotient, remainder)
 }
@@ -40,5 +40,5 @@ fun gcd(f: ComplexPolynomial,
  * @return true if the polynomial is null
  */
 private fun isZero(p: ComplexPolynomial): Boolean {
-    return p.degree() == 0 && p[0] == komplex.ZERO // TODO zero comparison
+    return p.degree == 0 && p[0] == komplex.ZERO // TODO zero comparison
 }
