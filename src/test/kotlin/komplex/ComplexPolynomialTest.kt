@@ -1,6 +1,6 @@
 package komplex
 
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class ComplexPolynomialTest {
@@ -92,6 +92,15 @@ class ComplexPolynomialTest {
 
         val p3 = p2 / i
         assertEquals("(1.0000)+(-1.0000i)z", p3.toString())
+    }
+
+    @Test
+    fun testEquals() {
+        val p1 = ComplexPolynomial(komplex.ONE, komplex.ZERO, komplex.ONE)
+        val p2 = ComplexPolynomial(i, komplex.ONE)
+        assertFalse(p1.equals(null))
+        assertFalse(p1 == p2)
+        assertTrue(p1 == ComplexPolynomial(komplex.ONE, komplex.ZERO, komplex.ONE))
     }
 
     private fun verifyCoefficients(expected: List<Complex>, p: ComplexPolynomial) {

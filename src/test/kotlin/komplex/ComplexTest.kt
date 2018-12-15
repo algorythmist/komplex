@@ -1,8 +1,6 @@
 package komplex
 
-import komplex.*
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import kotlin.math.PI
 
@@ -23,6 +21,21 @@ class ComplexTest {
 
         c2 = 3 - 2 * i
         assertEquals(Complex(3.0, -2.0), c2)
+
+        assertFalse(c1.equals(null))
+    }
+
+    @Test
+    fun testDestructuring() {
+        val (x,y) = Complex(1,2)
+        assertEquals(1.0,x)
+        assertEquals(2.0, y)
+    }
+
+    @Test
+    fun testConjugate() {
+        val c = Complex(1, 2)
+        assertEquals(Complex(1,-2), c.conjugate())
     }
 
     @Test

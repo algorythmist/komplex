@@ -43,14 +43,14 @@ operator fun Number.minus(c: Complex) = Complex(this.toDouble() - c.real, -c.img
 operator fun Number.times(c: Complex) = Complex(this.toDouble() * c.real, this.toDouble() * c.img)
 
 /**
- * Defines komplex numbers and their algebraic operations
+ * Defines complex numbers and their algebraic operations
  */
 class Complex(val real: Double, val img: Double) {
 
+    constructor(real : Number, img : Number) : this(real.toDouble(), img.toDouble())
+
     override fun equals(other: Any?): Boolean {
-        if (other == null || other !is Complex || real != other.real || img != other.img)
-            return false
-        return true
+        return (other is Complex && real == other.real && img == other.img)
     }
 
     override fun hashCode(): Int {
@@ -79,25 +79,22 @@ class Complex(val real: Double, val img: Double) {
         return num / den
     }
 
-    fun conjugate(): Complex = Complex(real, -img)
+    operator fun component1() = real
+    operator fun component2() = img
 
-    fun normSquared(): Double = real * real + img * img
+    fun conjugate() = Complex(real, -img)
+
+    fun normSquared() = real * real + img * img
 
     fun abs(): Double = sqrt(this.normSquared())
 
     fun phase(): Double = atan(img / real)
 
-    fun pow(a: Double): Complex {
-        return exp(ln(this) * a)
-    }
+    fun pow(a: Double) = exp(ln(this) * a)
 
-    fun pow(a: Int): Complex {
-        return exp(ln(this) * a)
-    }
+    fun pow(a: Int) = exp(ln(this) * a)
 
-    fun pow(a: Complex): Complex {
-        return exp(ln(this) * a)
-    }
+    fun pow(a: Complex) = exp(ln(this) * a)
 
     override fun toString(): String {
         return when {
@@ -112,8 +109,6 @@ class Complex(val real: Double, val img: Double) {
         fun fromNumber(n: Number) = Complex(n.toDouble(), 0.0)
     }
 
-    fun isZero(tolerance: Double): Boolean {
-        return this.abs() < tolerance
-    }
+    fun isZero(tolerance: Double) = this.abs() < tolerance
 
 }

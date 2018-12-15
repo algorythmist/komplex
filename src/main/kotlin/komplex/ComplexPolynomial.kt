@@ -31,7 +31,7 @@ class ComplexPolynomial(vararg coeff: Complex) {
         fun constant(n: Number) = ComplexPolynomial(Complex.fromNumber(n))
 
         fun monomial(degree: Int, coefficient: Complex): ComplexPolynomial {
-            val a = Array<Complex>(degree + 1, { _ -> komplex.ZERO })
+            val a = Array<Complex>(degree + 1) { _ -> komplex.ZERO }
             a[degree] = coefficient
             return ComplexPolynomial(*a)
         }
@@ -41,7 +41,7 @@ class ComplexPolynomial(vararg coeff: Complex) {
 
     //TODO implement without string repr
     override fun equals(other: Any?): Boolean {
-        if (other == null || other !is ComplexPolynomial)
+        if (other !is ComplexPolynomial)
             return false
         return this.toString() == other.toString()
     }
