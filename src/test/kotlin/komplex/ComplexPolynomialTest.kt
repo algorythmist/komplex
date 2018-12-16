@@ -14,10 +14,10 @@ class ComplexPolynomialTest {
     }
 
     @Test
-    fun testValue() {
-        val p = ComplexPolynomial(Complex(1.0, 1.0), i, Complex(1.0, 0.0))
+    fun testInvoke() {
+        val p = ComplexPolynomial(1+i, i, Complex(1.0, 0.0))
         assertEquals(2, p.degree)
-        val z = p.value(Complex(0.0, -1.0))
+        val z = p(Complex(0.0, -1.0))
         assertEquals(1.0, z.real)
         assertEquals(1.0, z.img)
 

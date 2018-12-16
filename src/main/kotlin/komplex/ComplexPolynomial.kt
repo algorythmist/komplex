@@ -35,15 +35,11 @@ class ComplexPolynomial(vararg coeff: Complex) {
             a[degree] = coefficient
             return ComplexPolynomial(*a)
         }
-
         fun of(a: DoubleArray) = ComplexPolynomial(*(a.map { Complex.fromNumber(it) }.toTypedArray()))
     }
 
-    //TODO implement without string repr
     override fun equals(other: Any?): Boolean {
-        if (other !is ComplexPolynomial)
-            return false
-        return this.toString() == other.toString()
+        return (other is ComplexPolynomial && coefficients contentEquals other.coefficients)
     }
 
     //TODO implement without string repr
@@ -51,7 +47,7 @@ class ComplexPolynomial(vararg coeff: Complex) {
         return this.toString().hashCode()
     }
 
-    fun value(x: Complex): Complex {
+    operator fun invoke(x: Complex): Complex {
         var powx = x
         var v = coefficients[0]
         for (n in 1 until coefficients.size) {
