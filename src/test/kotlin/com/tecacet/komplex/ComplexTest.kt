@@ -1,5 +1,6 @@
-package komplex
+package com.tecacet.komplex
 
+import com.tecacet.komplex.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import kotlin.math.PI
@@ -27,7 +28,7 @@ class ComplexTest {
 
     @Test
     fun testDestructuring() {
-        val (x,y) = Complex(1,2)
+        val (x,y) = Complex(1, 2)
         assertEquals(1.0,x)
         assertEquals(2.0, y)
     }
@@ -35,7 +36,7 @@ class ComplexTest {
     @Test
     fun testConjugate() {
         val c = Complex(1, 2)
-        assertEquals(Complex(1,-2), c.conjugate())
+        assertEquals(Complex(1, -2), c.conjugate())
     }
 
     @Test

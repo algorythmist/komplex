@@ -1,4 +1,4 @@
-package komplex
+package com.tecacet.komplex
 
 import kotlin.math.*
 

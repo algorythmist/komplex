@@ -1,4 +1,4 @@
-package komplex
+package com.tecacet.komplex
 
 operator fun Number.times(cp: ComplexPolynomial) = cp * this.toDouble()
 
@@ -24,14 +24,14 @@ class ComplexPolynomial(vararg coeff: Complex) {
     constructor(cp: ComplexPolynomial) : this(*cp.coefficients)
 
     companion object {
-        val ZERO = ComplexPolynomial(komplex.ZERO)
+        val ZERO = ComplexPolynomial(com.tecacet.komplex.ZERO)
 
         fun constant(c: Complex) = ComplexPolynomial(c)
 
         fun constant(n: Number) = ComplexPolynomial(Complex.fromNumber(n))
 
         fun monomial(degree: Int, coefficient: Complex): ComplexPolynomial {
-            val a = Array<Complex>(degree + 1) { _ -> komplex.ZERO }
+            val a = Array<Complex>(degree + 1) { _ -> com.tecacet.komplex.ZERO }
             a[degree] = coefficient
             return ComplexPolynomial(*a)
         }
@@ -137,7 +137,7 @@ class ComplexPolynomial(vararg coeff: Complex) {
     }
 
     operator fun div(other: ComplexPolynomial): Pair<ComplexPolynomial, ComplexPolynomial> {
-        return komplex.divide(this, other)
+        return divide(this, other)
     }
 
     private fun isZero() = degree == 0 && coefficients[0].isZero(TOLERANCE)

@@ -1,4 +1,4 @@
-package komplex
+package com.tecacet.komplex
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -8,14 +8,14 @@ class ComplexPolynomialTest {
 
     @Test
     fun testZeroCoefficients() {
-        val p = ComplexPolynomial(komplex.ONE, komplex.ZERO, i, Complex(0.0, 0.0))
+        val p = ComplexPolynomial(ONE, ZERO, i, Complex(0.0, 0.0))
         assertEquals(2, p.degree)
         assertEquals("(1.0000)+(1.0000i)z^2", p.toString())
     }
 
     @Test
     fun testInvoke() {
-        val p = ComplexPolynomial(1+i, i, Complex(1.0, 0.0))
+        val p = ComplexPolynomial(1 + i, i, Complex(1.0, 0.0))
         assertEquals(2, p.degree)
         val z = p(Complex(0.0, -1.0))
         assertEquals(1.0, z.real)
@@ -84,8 +84,8 @@ class ComplexPolynomialTest {
 
     @Test
     fun testDivide() {
-        val p1 = ComplexPolynomial(komplex.ONE, komplex.ZERO, komplex.ONE)
-        val p2 = ComplexPolynomial(i, komplex.ONE)
+        val p1 = ComplexPolynomial(ONE, ZERO, ONE)
+        val p2 = ComplexPolynomial(i, ONE)
         val (q, r) = p1 / p2
         assertEquals("(-1.0000i)+(1.0000)z", q.toString())
         assertEquals(ComplexPolynomial.ZERO, r)
@@ -96,11 +96,11 @@ class ComplexPolynomialTest {
 
     @Test
     fun testEquals() {
-        val p1 = ComplexPolynomial(komplex.ONE, komplex.ZERO, komplex.ONE)
-        val p2 = ComplexPolynomial(i, komplex.ONE)
+        val p1 = ComplexPolynomial(ONE, ZERO, ONE)
+        val p2 = ComplexPolynomial(i, ONE)
         assertFalse(p1.equals(null))
         assertFalse(p1 == p2)
-        assertTrue(p1 == ComplexPolynomial(komplex.ONE, komplex.ZERO, komplex.ONE))
+        assertTrue(p1 == ComplexPolynomial(ONE, ZERO, ONE))
     }
 
     private fun verifyCoefficients(expected: List<Complex>, p: ComplexPolynomial) {
