@@ -3,7 +3,7 @@ package com.tecacet.komplex
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-internal class DivisionAlgoritmTest {
+internal class DivisionAlgorithmTest {
 
     @Test
     fun testDivision() {
