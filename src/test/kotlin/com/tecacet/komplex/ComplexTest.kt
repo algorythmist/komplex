@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import kotlin.math.PI
 
-class ComplexTest {
+internal class ComplexTest {
 
     @Test
     fun testEquals() {

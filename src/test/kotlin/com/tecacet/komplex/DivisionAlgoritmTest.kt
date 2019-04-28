@@ -1,12 +1,9 @@
 package com.tecacet.komplex
 
-import com.tecacet.komplex.ComplexPolynomial
-import com.tecacet.komplex.divide
-import com.tecacet.komplex.gcd
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class DivisionAlgoritmTest {
+internal class DivisionAlgoritmTest {
 
     @Test
     fun testDivision() {
@@ -18,7 +15,7 @@ class DivisionAlgoritmTest {
 
         assertEquals(dividend, divisor * quotient + remainder)
 
-        //TODO use komplex
+        //TODO test with complex numbers
     }
 
 

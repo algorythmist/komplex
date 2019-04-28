@@ -3,7 +3,7 @@ package com.tecacet.komplex
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class ComplexPolynomialTest {
+internal class ComplexPolynomialTest {
 
 
     @Test
