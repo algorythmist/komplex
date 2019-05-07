@@ -2,33 +2,75 @@ package com.tecacet.komplex
 
 import kotlin.math.*
 
+/**
+ * Complex 0 = 0 + 0i
+ */
 val ZERO = Complex(0.0, 0.0)
+/**
+ * Complex 1 = 1 + 0i
+ */
 val ONE = Complex(1.0, 0.0)
+/**
+ * Complex unit = 0 + i
+ */
 val i = Complex(0.0, 1.0)
 
+/**
+ * Complex norm
+ */
 fun abs(c: Complex): Double = c.abs()
 
+/**
+ * Complex exponential
+ */
 fun exp(c: Complex): Complex {
     val e = exp(c.real)
     return Complex(e * cos(c.img), e * sin(c.img))
 }
 
+/**
+ * Hyperbolic sine
+ */
 fun sinh(c: Complex) = (exp(c) - exp(-c)) / 2
 
+/**
+ * Hyperbolic cosine
+ */
 fun cosh(c: Complex) = (exp(c) + exp(-c)) / 2
 
+/**
+ * Hyperbolic tangent
+ */
 fun tanh(c: Complex) = sinh(c) / cosh(c)
 
+/**
+ * Hyperbolic cotangent
+ */
 fun coth(c: Complex) = cosh(c) / sinh(c)
 
+/**
+ * Complex cosine
+ */
 fun cos(c: Complex) = (exp(i * c) + exp(-i * c)) / 2.0
 
+/**
+ * Complex sine
+ */
 fun sin(c: Complex) = i * (exp(-i * c) - exp(i * c)) / 2.0
 
+/**
+ * Complex tangent
+ */
 fun tan(c: Complex) = sin(c) / cos(c)
 
+/**
+ * Complex cotangent
+ */
 fun cot(c: Complex) = cos(c) / sin(c)
 
+/**
+ * Complex secant
+ */
 fun sec(c: Complex) = ONE / cos(c)
 
 /**
@@ -42,12 +84,16 @@ operator fun Number.minus(c: Complex) = Complex(this.toDouble() - c.real, -c.img
 
 operator fun Number.times(c: Complex) = Complex(this.toDouble() * c.real, this.toDouble() * c.img)
 
+operator fun Number.div(c: Complex) = ONE / c
+
 /**
  * Defines complex numbers and their algebraic operations
+ * @param real the real component
+ * @param img the imaginary component
  */
 class Complex(val real: Double, val img: Double) {
 
-    constructor(real : Number, img : Number) : this(real.toDouble(), img.toDouble())
+    constructor(real: Number, img: Number) : this(real.toDouble(), img.toDouble())
 
     override fun equals(other: Any?): Boolean {
         return (other is Complex && real == other.real && img == other.img)
@@ -82,6 +128,9 @@ class Complex(val real: Double, val img: Double) {
     operator fun component1() = real
     operator fun component2() = img
 
+    /**
+     * Complex conjugate = x-y*i
+     */
     fun conjugate() = Complex(real, -img)
 
     fun normSquared() = real * real + img * img
@@ -92,7 +141,7 @@ class Complex(val real: Double, val img: Double) {
 
     fun pow(a: Double) = exp(ln(this) * a)
 
-    fun pow(a: Int) = exp(ln(this) * a)
+    fun pow(a: Number) = exp(ln(this) * a)
 
     fun pow(a: Complex) = exp(ln(this) * a)
 
@@ -109,6 +158,9 @@ class Complex(val real: Double, val img: Double) {
         fun fromNumber(n: Number) = Complex(n.toDouble(), 0.0)
     }
 
+    /**
+     * Tests if the norm of the complex number is smaller than the given tolerance
+     */
     fun isZero(tolerance: Double) = this.abs() < tolerance
 
 }

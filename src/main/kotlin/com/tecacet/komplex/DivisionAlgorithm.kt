@@ -22,6 +22,9 @@ fun divide(dividend: ComplexPolynomial,
     return Pair(quotient, remainder)
 }
 
+/**
+ * Greatest Common Divider of two polynomials
+ */
 fun gcd(f: ComplexPolynomial,
         g: ComplexPolynomial): ComplexPolynomial {
     var gcd = ComplexPolynomial(f)

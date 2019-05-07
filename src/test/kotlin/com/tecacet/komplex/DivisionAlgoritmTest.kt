@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 internal class DivisionAlgorithmTest {
 
     @Test
-    fun testDivision() {
+    fun testRealPolyniomialDivision() {
         val dividend = ComplexPolynomial.of(doubleArrayOf(1.0, 1.0, 2.0, 1.0))
         val divisor = ComplexPolynomial.of(doubleArrayOf(1.0, 2.0))
         val (quotient, remainder) = divide(dividend, divisor)
@@ -14,10 +14,16 @@ internal class DivisionAlgorithmTest {
         assertEquals("(0.8750)", remainder.toString())
 
         assertEquals(dividend, divisor * quotient + remainder)
-
-        //TODO test with complex numbers
     }
 
+    @Test
+    fun testComplexPolynomialDivision() {
+        val dividend = ComplexPolynomial(ONE, ONE, i)
+        val divisor = ComplexPolynomial(ONE, i)
+        val (quotient, remainder) = divide(dividend, divisor)
+        assertEquals("(1.0000)z", quotient.toString())
+        assertEquals("(1.0000)", remainder.toString())
+    }
 
     @Test
     fun testGcd() {

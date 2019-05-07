@@ -1,6 +1,5 @@
 package com.tecacet.komplex
 
-import com.tecacet.komplex.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import kotlin.math.PI
@@ -28,8 +27,8 @@ internal class ComplexTest {
 
     @Test
     fun testDestructuring() {
-        val (x,y) = Complex(1, 2)
-        assertEquals(1.0,x)
+        val (x, y) = Complex(1, 2)
+        assertEquals(1.0, x)
         assertEquals(2.0, y)
     }
 
@@ -105,7 +104,6 @@ internal class ComplexTest {
         assertEquals(-2.75, c2.real)
         assertEquals(-0.25, c2.img)
 
-
     }
 
     @Test
@@ -158,6 +156,10 @@ internal class ComplexTest {
         z = cos(c3)
         assertEquals(-0.6421481, z.real, 0.0001)
         assertEquals(1.068607, z.img, 0.0001)
+
+        assertEquals(sin(c3)/cos(c3), tan(c3))
+        assertEquals(cos(c3)/sin(c3), cot(c3))
+        assertEquals(1/cos(c3), sec(c3))
 
         z = c3.pow(2.3)
         assertEquals(3.07625065, z.real, 0.0001)

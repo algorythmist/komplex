@@ -20,7 +20,6 @@ internal class ComplexPolynomialTest {
         val z = p(Complex(0.0, -1.0))
         assertEquals(1.0, z.real)
         assertEquals(1.0, z.img)
-
     }
 
     @Test

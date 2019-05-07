@@ -1,10 +1,9 @@
 # komplex
 
-Komplex is a Kotlin library for Complex Analysis.
-currently it supports complex numbers an complex polynomials.
-It uses operator overloading to make the expression look
-as similar to mathemetical formulas as possible
+komplex is a Kotlin library for Complex Analysis.
+It supports complex number and complex polynomial arithmetic.
 
+## Complex Arithmetic
 ```kotlin
 import komplex.*
 
@@ -28,11 +27,18 @@ et cetera...
 
 ## Complex Polynomials
 
-
 ```kotlin
 val p1 = ComplexPolynomial(1 + i, i, 1 + 0 * i)
 val p2 = ComplexPolynomial(ONE, i * 2 + 1, i, i - 2)
 
 val p3 = p1 + p2
 val p4 = p1 * p2
+```
+
+Division of complex polynomials is also supported:
+
+```kotlin
+val dividend = ComplexPolynomial(ONE, ONE, i)
+val divisor = ComplexPolynomial(ONE, i)
+val (quotient, remainder) = divide(dividend, divisor)
 ```
