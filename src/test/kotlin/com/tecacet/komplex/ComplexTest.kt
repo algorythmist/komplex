@@ -170,7 +170,7 @@ internal class ComplexTest {
         assertEquals(1.1457119, z.img, 0.0001)
 
         z = c3.pow(2)
-        assertEquals(2.0000, z.real, 0.0001)
+        assertEquals(3.0000, z.real, 0.0001)
         assertEquals(-4.000, z.img, 0.0001)
     }
 
