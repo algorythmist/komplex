@@ -24,6 +24,9 @@ fun divide(dividend: ComplexPolynomial,
 
 /**
  * Greatest Common Divider of two polynomials
+ * @param f a polynomial
+ * @param g a polynomial
+ * @return The largest polynomial that divides both f and g
  */
 fun gcd(f: ComplexPolynomial,
         g: ComplexPolynomial): ComplexPolynomial {
