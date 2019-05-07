@@ -2,6 +2,7 @@ package com.tecacet.komplex
 
 /**
  * Division of polynomials using Euclid's algorithm
+ * @return the quotient and remainder as a pair
  */
 fun divide(dividend: ComplexPolynomial,
            divisor: ComplexPolynomial): Pair<ComplexPolynomial, ComplexPolynomial> {
