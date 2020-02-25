@@ -63,8 +63,8 @@
     </scm>
 
     <ciManagement>
-        <system>TravisCI</system>
-        <url>https://travis-ci.org/algorythmist/komplex</url>
+        <system>GitHub</system>
+        <url>https://github.com/algorythmist/komplex/actions</url>
     </ciManagement>
 
     <issueManagement>
