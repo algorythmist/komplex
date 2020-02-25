@@ -78,7 +78,6 @@ class ComplexPolynomial(vararg coefficients: Complex) {
             powx *= z
         }
         return v
-
     }
 
     val degree get() = coefficients.size - 1
@@ -104,7 +103,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
             }
         }
 
-        return (0 until coefficients.size).map { coefficientToString(it) }.filter { !it.isEmpty() }.joinToString(separator = "+")
+        return (coefficients.indices).map { coefficientToString(it) }.filter { !it.isEmpty() }.joinToString(separator = "+")
     }
 
     operator fun unaryMinus() = ComplexPolynomial(*coefficients.map { c -> -c }.toTypedArray())
@@ -170,6 +169,11 @@ class ComplexPolynomial(vararg coefficients: Complex) {
 
     operator fun div(other: ComplexPolynomial): Pair<ComplexPolynomial, ComplexPolynomial> {
         return divide(this, other)
+    }
+
+    fun derivative() : ComplexPolynomial {
+        val d = (1..degree).map { coefficients[it]*it }.toTypedArray()
+        return ComplexPolynomial(*d)
     }
 
     private fun isZero() = degree == 0 && coefficients[0].isZero(TOLERANCE)

@@ -102,6 +102,15 @@ internal class ComplexPolynomialTest {
         assertTrue(p1 == ComplexPolynomial(ONE, ZERO, ONE))
     }
 
+    @Test
+    fun testDerivative() {
+        val p = ComplexPolynomial.of(doubleArrayOf(2.0, 1.0, 3.0, 4.0))
+        assertEquals(3, p.degree)
+        val dp = p.derivative()
+        assertEquals(2, dp.degree)
+        assertEquals("(1.0000)+(6.0000)z+(12.0000)z^2", dp.toString())
+    }
+
     private fun verifyCoefficients(expected: List<Complex>, p: ComplexPolynomial) {
         (0..p.degree).forEach { assertEquals(expected[it], p[it]) }
     }
