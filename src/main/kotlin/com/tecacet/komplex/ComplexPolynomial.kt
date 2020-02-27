@@ -1,5 +1,7 @@
 package com.tecacet.komplex
 
+val Z = ComplexPolynomial.of(doubleArrayOf(0.0, 1.0))
+
 operator fun Number.times(cp: ComplexPolynomial) = cp * this.toDouble()
 
 operator fun Complex.times(cp: ComplexPolynomial) = cp * this
@@ -115,6 +117,18 @@ class ComplexPolynomial(vararg coefficients: Complex) {
     operator fun div(z: Complex) = ComplexPolynomial(*coefficients.map { c -> c / z }.toTypedArray())
 
     operator fun div(n: Number) = ComplexPolynomial(*coefficients.map { c -> c / n }.toTypedArray())
+
+    operator fun plus(n : Number) : ComplexPolynomial {
+        val coeff = this.coefficients.copyOf()
+        coeff[0] = coeff[0] + n
+        return ComplexPolynomial(*coeff)
+    }
+
+    operator fun plus(c : Complex) : ComplexPolynomial {
+        val coeff = this.coefficients.copyOf()
+        coeff[0] = coeff[0] + c
+        return ComplexPolynomial(*coeff)
+    }
 
     /**
      * Add two polynomials

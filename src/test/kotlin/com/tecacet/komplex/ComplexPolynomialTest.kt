@@ -63,7 +63,7 @@ internal class ComplexPolynomialTest {
 
     @Test
     fun testMultiply() {
-        val p1 = ComplexPolynomial(Complex.fromNumber(1.0), Complex.fromNumber(2.0), Complex.fromNumber(-1.0))
+        val p1 = ComplexPolynomial.of(doubleArrayOf(1.0, 2.0, -1.0))
         val p2 = ComplexPolynomial(Complex.fromNumber(2), i)
         val p = p1 * p2
         verifyCoefficients(listOf(2 + 0 * i, 4 + i, -2 + 2 * i, -i), p)
@@ -109,6 +109,23 @@ internal class ComplexPolynomialTest {
         val dp = p.derivative()
         assertEquals(2, dp.degree)
         assertEquals("(1.0)+(6.0)z+(12.0)z^2", dp.toString())
+    }
+
+    @Test
+    fun testAddConstant() {
+        val p1 = ComplexPolynomial(1 + i, i, 1 + 0 * i)
+        assertEquals("(1.0+1.0i)+(1.0i)z+(1.0)z^2", p1.toString())
+        val p2 = p1 + 2
+        assertEquals("(3.0+1.0i)+(1.0i)z+(1.0)z^2", p2.toString())
+        val p3 = p1 + Complex(1.0, 1.0)
+        assertEquals("(2.0+2.0i)+(1.0i)z+(1.0)z^2", p3.toString())
+    }
+
+    @Test
+    fun testZ() {
+        assertEquals("(1.0)z", Z.toString())
+        val p = (1.0+1.0*i)*Z*Z + 2.0 * Z + 1.0
+        assertEquals("(1.0)+(2.0)z+(1.0+1.0i)z^2", p.toString())
     }
 
     private fun verifyCoefficients(expected: List<Complex>, p: ComplexPolynomial) {
