@@ -10,7 +10,7 @@ internal class ComplexPolynomialTest {
     fun testZeroCoefficients() {
         val p = ComplexPolynomial(ONE, ZERO, i, Complex(0.0, 0.0))
         assertEquals(2, p.degree)
-        assertEquals("(1.0000)+(1.0000i)z^2", p.toString())
+        assertEquals("(1.0)+(1.0i)z^2", p.toString())
     }
 
     @Test
@@ -52,7 +52,7 @@ internal class ComplexPolynomialTest {
         assertEquals(3, p2.degree)
         val p3 = p1 + p2
         assertEquals(3, p3.degree)
-        assertEquals("(2.0000 + 1.0000i)+(1.0000 + 3.0000i)z+(1.0000 + 1.0000i)z^2+(-2.0000 + 1.0000i)z^3",
+        assertEquals("(2.0+1.0i)+(1.0+3.0i)z+(1.0+1.0i)z^2+(-2.0+1.0i)z^3",
                 p3.toString())
 
         val p4 = p2 - p1
@@ -75,10 +75,10 @@ internal class ComplexPolynomialTest {
         assertEquals("0", zero.toString())
 
         val p1 = ComplexPolynomial.constant(2)
-        assertEquals("(2.0000)", p1.toString())
+        assertEquals("(2.0)", p1.toString())
 
         val p2 = ComplexPolynomial.constant(2 + i)
-        assertEquals("(2.0000 + 1.0000i)", p2.toString())
+        assertEquals("(2.0+1.0i)", p2.toString())
     }
 
     @Test
@@ -86,11 +86,11 @@ internal class ComplexPolynomialTest {
         val p1 = ComplexPolynomial(ONE, ZERO, ONE)
         val p2 = ComplexPolynomial(i, ONE)
         val (q, r) = p1 / p2
-        assertEquals("(-1.0000i)+(1.0000)z", q.toString())
+        assertEquals("(-1.0i)+(1.0)z", q.toString())
         assertEquals(ComplexPolynomial.ZERO, r)
 
         val p3 = p2 / i
-        assertEquals("(1.0000)+(-1.0000i)z", p3.toString())
+        assertEquals("(1.0)+(-1.0i)z", p3.toString())
     }
 
     @Test
@@ -108,7 +108,7 @@ internal class ComplexPolynomialTest {
         assertEquals(3, p.degree)
         val dp = p.derivative()
         assertEquals(2, dp.degree)
-        assertEquals("(1.0000)+(6.0000)z+(12.0000)z^2", dp.toString())
+        assertEquals("(1.0)+(6.0)z+(12.0)z^2", dp.toString())
     }
 
     private fun verifyCoefficients(expected: List<Complex>, p: ComplexPolynomial) {

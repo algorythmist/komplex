@@ -147,14 +147,17 @@ class Complex(val real: Double, val img: Double) {
 
     override fun toString(): String {
         return when {
-            img == 0.0 -> "%.4f".format(real)
-            real == 0.0 -> "%.4fi".format(img)
-            img < 0 -> "%.4f - %.4fi".format(real, -img)
-            else -> "%.4f + %.4fi".format(real, img)
+            isPracticallyZero(img) -> "$real"
+            isPracticallyZero(real) -> "${img}i"
+            img < 0 -> "$real-${-img}i"
+            else -> "${real}+${img}i"
         }
     }
 
+    private fun isPracticallyZero(d : Double) = abs(d) < DEFAULT_TOLERANCE
+
     companion object {
+        val DEFAULT_TOLERANCE = 1.0E-15
         fun fromNumber(n: Number) = Complex(n.toDouble(), 0.0)
     }
 
