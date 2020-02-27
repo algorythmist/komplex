@@ -126,6 +126,9 @@ internal class ComplexPolynomialTest {
         assertEquals("(1.0)z", Z.toString())
         val p = (1.0+1.0*i)*Z*Z + 2.0 * Z + 1.0
         assertEquals("(1.0)+(2.0)z+(1.0+1.0i)z^2", p.toString())
+
+        val q = (1.0+1.0*i)*(Z to 3) + 2.0 * (Z to 2) + 1.0 * Z - (1.0 + 0.5*i)
+        println(q)
     }
 
     private fun verifyCoefficients(expected: List<Complex>, p: ComplexPolynomial) {

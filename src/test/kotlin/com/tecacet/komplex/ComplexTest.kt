@@ -174,4 +174,10 @@ internal class ComplexTest {
         assertEquals(-4.000, z.img, 0.0001)
     }
 
+    @Test
+    fun testPower() {
+        val c = 1.0 + 0.5 * i
+        val c3 = c to 3
+        assertEquals("0.25+1.375i", c3.toString())
+    }
 }

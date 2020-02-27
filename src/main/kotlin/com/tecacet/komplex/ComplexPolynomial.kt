@@ -130,6 +130,18 @@ class ComplexPolynomial(vararg coefficients: Complex) {
         return ComplexPolynomial(*coeff)
     }
 
+    operator fun minus(n : Number) : ComplexPolynomial {
+        val coeff = this.coefficients.copyOf()
+        coeff[0] = coeff[0] - n
+        return ComplexPolynomial(*coeff)
+    }
+
+    operator fun minus(c : Complex) : ComplexPolynomial {
+        val coeff = this.coefficients.copyOf()
+        coeff[0] = coeff[0] - c
+        return ComplexPolynomial(*coeff)
+    }
+
     /**
      * Add two polynomials
      */
@@ -192,4 +204,14 @@ class ComplexPolynomial(vararg coefficients: Complex) {
 
     private fun isZero() = degree == 0 && coefficients[0].isZero(TOLERANCE)
 
+    infix fun to(exponent: Int): ComplexPolynomial {
+        if (exponent == 0 ) {
+            return ZERO
+        }
+        if (exponent == 1){
+            return this
+        }
+        //TODO: inefficient - use divide and conquer
+        return this* to(exponent-1)
+    }
 }

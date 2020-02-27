@@ -166,4 +166,14 @@ class Complex(val real: Double, val img: Double) {
      */
     fun isZero(tolerance: Double) = this.abs() < tolerance
 
+    infix fun to(exponent: Int): Complex {
+        if (exponent == 0 ) {
+            return Complex(1.0, 0.0)
+        }
+        if (exponent == 1){
+            return this
+        }
+        //TODO: inefficient - use divide and conquer
+        return this* to(exponent-1)
+    }
 }
