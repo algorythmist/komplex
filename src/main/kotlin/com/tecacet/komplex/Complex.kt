@@ -2,6 +2,8 @@ package com.tecacet.komplex
 
 import kotlin.math.*
 
+fun isEven(i: Int) = i % 2 == 0
+
 /**
  * Complex 0 = 0 + 0i
  */
@@ -154,7 +156,7 @@ class Complex(val real: Double, val img: Double) {
         }
     }
 
-    private fun isPracticallyZero(d : Double) = abs(d) < DEFAULT_TOLERANCE
+    private fun isPracticallyZero(d: Double) = abs(d) < DEFAULT_TOLERANCE
 
     companion object {
         val DEFAULT_TOLERANCE = 1.0E-15
@@ -167,13 +169,18 @@ class Complex(val real: Double, val img: Double) {
     fun isZero(tolerance: Double) = this.abs() < tolerance
 
     infix fun to(exponent: Int): Complex {
-        if (exponent == 0 ) {
+        if (exponent == 0) {
             return Complex(1.0, 0.0)
         }
-        if (exponent == 1){
+        if (exponent == 1) {
             return this
         }
-        //TODO: inefficient - use divide and conquer
-        return this* to(exponent-1)
+        val half = to(exponent / 2)
+        return if (isEven(exponent)) {
+            half * half
+        } else {
+            half * half * this
+        }
     }
+
 }

@@ -157,9 +157,9 @@ internal class ComplexTest {
         assertEquals(-0.6421481, z.real, 0.0001)
         assertEquals(1.068607, z.img, 0.0001)
 
-        assertEquals(sin(c3)/cos(c3), tan(c3))
-        assertEquals(cos(c3)/sin(c3), cot(c3))
-        assertEquals(1/cos(c3), sec(c3))
+        assertEquals(sin(c3) / cos(c3), tan(c3))
+        assertEquals(cos(c3) / sin(c3), cot(c3))
+        assertEquals(1 / cos(c3), sec(c3))
 
         z = c3.pow(2.3)
         assertEquals(3.07625065, z.real, 0.0001)
@@ -177,7 +177,7 @@ internal class ComplexTest {
     @Test
     fun testPower() {
         val c = 1.0 + 0.5 * i
-        val c3 = c to 3
-        assertEquals("0.25+1.375i", c3.toString())
+        val c3 = c to 10
+        assertEquals("-0.2314453125-3.04296875i", c3.toString())
     }
 }

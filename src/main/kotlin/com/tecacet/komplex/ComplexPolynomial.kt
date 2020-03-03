@@ -211,7 +211,11 @@ class ComplexPolynomial(vararg coefficients: Complex) {
         if (exponent == 1){
             return this
         }
-        //TODO: inefficient - use divide and conquer
-        return this* to(exponent-1)
+        val half = to(exponent / 2)
+        return if (isEven(exponent)) {
+            half * half
+        } else {
+            half * half * this
+        }
     }
 }
