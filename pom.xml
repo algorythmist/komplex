@@ -14,9 +14,9 @@
     <url>https://github.com/algorythmist/komplex</url>
 
     <properties>
-        <kotlin.version>1.3.61</kotlin.version>
-        <jupiter.version>5.4.2</jupiter.version>
-        <dokka.version>0.9.18</dokka.version>
+        <kotlin.version>1.3.72</kotlin.version>
+        <jupiter.version>5.6.2</jupiter.version>
+        <dokka.version>0.10.1</dokka.version>
         <nexus-staging.version>1.6.8</nexus-staging.version>
         <maven-source.version>3.0.1</maven-source.version>
         <maven-gpg.version>1.6</maven-gpg.version>
@@ -63,8 +63,8 @@
     </scm>
 
     <ciManagement>
-        <system>TravisCI</system>
-        <url>https://travis-ci.org/algorythmist/komplex</url>
+        <system>GitHub</system>
+        <url>https://github.com/algorythmist/komplex/actions</url>
     </ciManagement>
 
     <issueManagement>

@@ -2,6 +2,8 @@ package com.tecacet.komplex
 
 import kotlin.math.*
 
+fun isEven(i: Int) = i % 2 == 0
+
 /**
  * Complex 0 = 0 + 0i
  */
@@ -147,14 +149,17 @@ class Complex(val real: Double, val img: Double) {
 
     override fun toString(): String {
         return when {
-            img == 0.0 -> "%.4f".format(real)
-            real == 0.0 -> "%.4fi".format(img)
-            img < 0 -> "%.4f - %.4fi".format(real, -img)
-            else -> "%.4f + %.4fi".format(real, img)
+            isPracticallyZero(img) -> "$real"
+            isPracticallyZero(real) -> "${img}i"
+            img < 0 -> "$real-${-img}i"
+            else -> "${real}+${img}i"
         }
     }
 
+    private fun isPracticallyZero(d: Double) = abs(d) < DEFAULT_TOLERANCE
+
     companion object {
+        val DEFAULT_TOLERANCE = 1.0E-15
         fun fromNumber(n: Number) = Complex(n.toDouble(), 0.0)
     }
 
@@ -162,5 +167,22 @@ class Complex(val real: Double, val img: Double) {
      * Tests if the norm of the complex number is smaller than the given tolerance
      */
     fun isZero(tolerance: Double) = this.abs() < tolerance
+
+    infix fun to(exponent: Int): Complex {
+        if (exponent == 0) {
+            return Complex(1.0, 0.0)
+        }
+        if (exponent == 1) {
+            return this
+        }
+        val half = to(exponent / 2)
+        return if (isEven(exponent)) {
+            half * half
+        } else {
+            half * half * this
+        }
+    }
+
+    infix fun to(exponent: Complex) = this.pow(exponent)
 
 }

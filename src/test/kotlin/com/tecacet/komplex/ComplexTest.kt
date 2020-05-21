@@ -41,27 +41,27 @@ internal class ComplexTest {
     @Test
     fun testToString() {
         var c1 = Complex(2.0, -3.1)
-        assertEquals("2.0000 - 3.1000i", c1.toString())
+        assertEquals("2.0-3.1i", c1.toString())
 
         c1 = Complex(2.0, 0.0)
-        assertEquals("2.0000", c1.toString())
+        assertEquals("2.0", c1.toString())
 
         c1 = Complex(0.0, -3.1)
-        assertEquals("-3.1000i", c1.toString())
+        assertEquals("-3.1i", c1.toString())
 
         c1 = Complex(0.0, 2.5)
-        assertEquals("2.5000i", c1.toString())
+        assertEquals("2.5i", c1.toString())
 
         c1 = Complex(0.0, 0.0)
-        assertEquals("0.0000", c1.toString())
+        assertEquals("0.0", c1.toString())
     }
 
     @Test
     fun testAdditionSubtraction() {
         val c1 = Complex(2.0, -3.1)
-        assertEquals("2.0000 - 3.1000i", c1.toString())
+        assertEquals("2.0-3.1i", c1.toString())
         val c2 = -c1
-        assertEquals("-2.0000 + 3.1000i", c2.toString())
+        assertEquals("-2.0+3.1i", c2.toString())
 
         val c3 = Complex(-5.0, 2.0)
         var c4 = c1 + c3
@@ -126,7 +126,7 @@ internal class ComplexTest {
     fun testSpecialFunctions() {
         val c1 = Complex(0.0, PI)
         val c2 = exp(c1)
-        assertEquals("-1.0000 + 0.0000i", c2.toString())
+        assertEquals("-1.0", c2.toString())
 
         val c3 = Complex(2.0, -1.0)
         var z = exp(c3)
@@ -157,9 +157,9 @@ internal class ComplexTest {
         assertEquals(-0.6421481, z.real, 0.0001)
         assertEquals(1.068607, z.img, 0.0001)
 
-        assertEquals(sin(c3)/cos(c3), tan(c3))
-        assertEquals(cos(c3)/sin(c3), cot(c3))
-        assertEquals(1/cos(c3), sec(c3))
+        assertEquals(sin(c3) / cos(c3), tan(c3))
+        assertEquals(cos(c3) / sin(c3), cot(c3))
+        assertEquals(1 / cos(c3), sec(c3))
 
         z = c3.pow(2.3)
         assertEquals(3.07625065, z.real, 0.0001)
@@ -174,4 +174,12 @@ internal class ComplexTest {
         assertEquals(-4.000, z.img, 0.0001)
     }
 
+    @Test
+    fun testPower() {
+        val c = 1.0 + 0.5 * i
+        val c10 = c to 10
+        assertEquals("-0.2314453125-3.04296875i", c10.toString())
+
+        assertEquals(-0.004219778905924383+0.10914868894792414 * i, (1 + 2*i)to 2*i)
+    }
 }

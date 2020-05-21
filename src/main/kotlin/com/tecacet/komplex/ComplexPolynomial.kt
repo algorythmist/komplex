@@ -1,5 +1,7 @@
 package com.tecacet.komplex
 
+val Z = ComplexPolynomial.of(doubleArrayOf(0.0, 1.0))
+
 operator fun Number.times(cp: ComplexPolynomial) = cp * this.toDouble()
 
 operator fun Complex.times(cp: ComplexPolynomial) = cp * this
@@ -78,7 +80,6 @@ class ComplexPolynomial(vararg coefficients: Complex) {
             powx *= z
         }
         return v
-
     }
 
     val degree get() = coefficients.size - 1
@@ -104,7 +105,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
             }
         }
 
-        return (0 until coefficients.size).map { coefficientToString(it) }.filter { !it.isEmpty() }.joinToString(separator = "+")
+        return (coefficients.indices).map { coefficientToString(it) }.filter { !it.isEmpty() }.joinToString(separator = "+")
     }
 
     operator fun unaryMinus() = ComplexPolynomial(*coefficients.map { c -> -c }.toTypedArray())
@@ -116,6 +117,30 @@ class ComplexPolynomial(vararg coefficients: Complex) {
     operator fun div(z: Complex) = ComplexPolynomial(*coefficients.map { c -> c / z }.toTypedArray())
 
     operator fun div(n: Number) = ComplexPolynomial(*coefficients.map { c -> c / n }.toTypedArray())
+
+    operator fun plus(n : Number) : ComplexPolynomial {
+        val coeff = this.coefficients.copyOf()
+        coeff[0] = coeff[0] + n
+        return ComplexPolynomial(*coeff)
+    }
+
+    operator fun plus(c : Complex) : ComplexPolynomial {
+        val coeff = this.coefficients.copyOf()
+        coeff[0] = coeff[0] + c
+        return ComplexPolynomial(*coeff)
+    }
+
+    operator fun minus(n : Number) : ComplexPolynomial {
+        val coeff = this.coefficients.copyOf()
+        coeff[0] = coeff[0] - n
+        return ComplexPolynomial(*coeff)
+    }
+
+    operator fun minus(c : Complex) : ComplexPolynomial {
+        val coeff = this.coefficients.copyOf()
+        coeff[0] = coeff[0] - c
+        return ComplexPolynomial(*coeff)
+    }
 
     /**
      * Add two polynomials
@@ -172,6 +197,25 @@ class ComplexPolynomial(vararg coefficients: Complex) {
         return divide(this, other)
     }
 
+    fun derivative() : ComplexPolynomial {
+        val d = (1..degree).map { coefficients[it]*it }.toTypedArray()
+        return ComplexPolynomial(*d)
+    }
+
     private fun isZero() = degree == 0 && coefficients[0].isZero(TOLERANCE)
 
+    infix fun to(exponent: Int): ComplexPolynomial {
+        if (exponent == 0 ) {
+            return ZERO
+        }
+        if (exponent == 1){
+            return this
+        }
+        val half = to(exponent / 2)
+        return if (isEven(exponent)) {
+            half * half
+        } else {
+            half * half * this
+        }
+    }
 }
