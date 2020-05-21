@@ -183,4 +183,6 @@ class Complex(val real: Double, val img: Double) {
         }
     }
 
+    infix fun to(exponent: Complex) = this.pow(exponent)
+
 }

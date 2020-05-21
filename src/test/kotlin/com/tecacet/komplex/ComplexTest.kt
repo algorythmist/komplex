@@ -177,7 +177,9 @@ internal class ComplexTest {
     @Test
     fun testPower() {
         val c = 1.0 + 0.5 * i
-        val c3 = c to 10
-        assertEquals("-0.2314453125-3.04296875i", c3.toString())
+        val c10 = c to 10
+        assertEquals("-0.2314453125-3.04296875i", c10.toString())
+
+        assertEquals(-0.004219778905924383+0.10914868894792414 * i, (1 + 2*i)to 2*i)
     }
 }
