@@ -159,7 +159,7 @@ class Complex(val real: Double, val img: Double) {
     private fun isPracticallyZero(d: Double) = abs(d) < DEFAULT_TOLERANCE
 
     companion object {
-        val DEFAULT_TOLERANCE = 1.0E-15
+        const val DEFAULT_TOLERANCE = 1.0E-15
         fun fromNumber(n: Number) = Complex(n.toDouble(), 0.0)
     }
 
