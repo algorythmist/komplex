@@ -180,6 +180,10 @@ internal class ComplexTest {
         val c10 = c to 10
         assertEquals("-0.2314453125-3.04296875i", c10.toString())
 
+        val c9 = c to 9
+        assertEquals("-1.40234375-2.341796875i", c9.toString())
+
         assertEquals(-0.004219778905924383+0.10914868894792414 * i, (1 + 2*i)to 2*i)
     }
+
 }
