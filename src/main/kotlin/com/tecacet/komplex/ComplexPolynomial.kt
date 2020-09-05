@@ -6,6 +6,8 @@ operator fun Number.times(cp: ComplexPolynomial) = cp * this.toDouble()
 
 operator fun Complex.times(cp: ComplexPolynomial) = cp * this
 
+operator fun Number.plus(cp: ComplexPolynomial) = cp + this.toDouble()
+
 /**
  * a complex polynomial of the form c[0] + c[1]z + c[2]z^2 + ...
  * where the c's are complex numbers
@@ -184,7 +186,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
     operator fun times(other: ComplexPolynomial): ComplexPolynomial {
         val resultOrder = degree + other.degree
 
-        val coeff = Array(resultOrder + 1, { _ -> Complex.fromNumber(0) })
+        val coeff = Array(resultOrder + 1, { Complex.fromNumber(0) })
         for (k in 0 until coefficients.size) {
             for (j in 0 until other.coefficients.size) {
                 coeff[k + j] += coefficients[k] * other.coefficients[j]
