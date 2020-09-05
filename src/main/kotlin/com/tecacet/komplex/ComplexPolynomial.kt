@@ -48,7 +48,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
          * @param coefficient the multiplier of the monomial
          */
         fun monomial(degree: Int, coefficient: Complex): ComplexPolynomial {
-            val a = Array(degree + 1) { _ -> com.tecacet.komplex.ZERO }
+            val a = Array(degree + 1) { com.tecacet.komplex.ZERO }
             a[degree] = coefficient
             return ComplexPolynomial(*a)
         }

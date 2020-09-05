@@ -169,7 +169,6 @@ class Complex(val real: Double, val img: Double) {
     fun isZero(tolerance: Double) = this.abs() < tolerance
 
     infix fun to(exponent: Int): Complex {
-        println("IN")
         if (exponent == 0) {
             return ONE
         }
