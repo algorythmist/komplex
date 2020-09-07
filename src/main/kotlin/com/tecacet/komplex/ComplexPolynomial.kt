@@ -1,6 +1,6 @@
 package com.tecacet.komplex
 
-val Z = ComplexPolynomial.of(doubleArrayOf(0.0, 1.0))
+val Z = ComplexPolynomial.of(0.0, 1.0)
 
 operator fun Number.times(cp: ComplexPolynomial) = cp * this.toDouble()
 
@@ -32,7 +32,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
     constructor(cp: ComplexPolynomial) : this(*cp.coefficients)
 
     companion object {
-        val ZERO = ComplexPolynomial(com.tecacet.komplex.ZERO)
+        val ZERO = ComplexPolynomial(Complex.ZERO)
 
         /**
          * Create the constant polynomial
@@ -50,7 +50,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
          * @param coefficient the multiplier of the monomial
          */
         fun monomial(degree: Int, coefficient: Complex): ComplexPolynomial {
-            val a = Array(degree + 1) { com.tecacet.komplex.ZERO }
+            val a = Array(degree + 1) { Complex.ZERO }
             a[degree] = coefficient
             return ComplexPolynomial(*a)
         }
@@ -59,7 +59,8 @@ class ComplexPolynomial(vararg coefficients: Complex) {
          * Create coefficients complex polynomial with real coefficients
          * @param coefficients the polynomial coefficients
          */
-        fun of(coefficients: DoubleArray) = ComplexPolynomial(*(coefficients.map { Complex.fromNumber(it) }.toTypedArray()))
+
+        fun of(vararg coefficients: Double) = ComplexPolynomial(*(coefficients.map { Complex.fromNumber(it) }.toTypedArray()))
     }
 
     override fun equals(other: Any?): Boolean {

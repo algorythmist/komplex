@@ -8,7 +8,7 @@ internal class ComplexPolynomialTest {
 
     @Test
     fun testZeroCoefficients() {
-        val p = ComplexPolynomial(ONE, ZERO, i, Complex(0.0, 0.0))
+        val p = ComplexPolynomial(Complex.ONE, Complex.ZERO, i, Complex(0.0, 0.0))
         assertEquals(2, p.degree)
         assertEquals("(1.0)+(1.0i)z^2", p.toString())
     }
@@ -47,7 +47,7 @@ internal class ComplexPolynomialTest {
     @Test
     fun testAddSubtract() {
         val p1 = ComplexPolynomial(1 + i, i, 1 + 0 * i)
-        val p2 = ComplexPolynomial(ONE, i * 2 + 1, i, i - 2)
+        val p2 = ComplexPolynomial(Complex.ONE, i * 2 + 1, i, i - 2)
         assertEquals(2, p1.degree)
         assertEquals(3, p2.degree)
         val p3 = p1 + p2
@@ -57,13 +57,13 @@ internal class ComplexPolynomialTest {
 
         val p4 = p2 - p1
         assertEquals(3, p4.degree)
-        val expected = listOf<Complex>(-i, 1 + i, -1 + i, -2 + i)
+        val expected = listOf(-i, 1 + i, -1 + i, -2 + i)
         verifyCoefficients(expected, p4)
     }
 
     @Test
     fun testMultiply() {
-        val p1 = ComplexPolynomial.of(doubleArrayOf(1.0, 2.0, -1.0))
+        val p1 = ComplexPolynomial.of(1.0, 2.0, -1.0)
         val p2 = ComplexPolynomial(Complex.fromNumber(2), i)
         val p = p1 * p2
         verifyCoefficients(listOf(2 + 0 * i, 4 + i, -2 + 2 * i, -i), p)
@@ -83,8 +83,8 @@ internal class ComplexPolynomialTest {
 
     @Test
     fun testDivide() {
-        val p1 = ComplexPolynomial(ONE, ZERO, ONE)
-        val p2 = ComplexPolynomial(i, ONE)
+        val p1 = ComplexPolynomial(Complex.ONE, Complex.ZERO, Complex.ONE)
+        val p2 = ComplexPolynomial(i, Complex.ONE)
         val (q, r) = p1 / p2
         assertEquals("(-1.0i)+(1.0)z", q.toString())
         assertEquals(ComplexPolynomial.ZERO, r)
@@ -95,16 +95,16 @@ internal class ComplexPolynomialTest {
 
     @Test
     fun testEquals() {
-        val p1 = ComplexPolynomial(ONE, ZERO, ONE)
-        val p2 = ComplexPolynomial(i, ONE)
+        val p1 = ComplexPolynomial(Complex.ONE, Complex.ZERO, Complex.ONE)
+        val p2 = ComplexPolynomial(i, Complex.ONE)
         assertFalse(p1.equals(null))
         assertFalse(p1 == p2)
-        assertTrue(p1 == ComplexPolynomial(ONE, ZERO, ONE))
+        assertTrue(p1 == ComplexPolynomial(Complex.ONE, Complex.ZERO, Complex.ONE))
     }
 
     @Test
     fun testDerivative() {
-        val p = ComplexPolynomial.of(doubleArrayOf(2.0, 1.0, 3.0, 4.0))
+        val p = ComplexPolynomial.of(2.0, 1.0, 3.0, 4.0)
         assertEquals(3, p.degree)
         val dp = p.derivative()
         assertEquals(2, dp.degree)

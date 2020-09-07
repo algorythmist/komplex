@@ -4,14 +4,7 @@ import kotlin.math.*
 
 fun isEven(i: Int) = i % 2 == 0
 
-/**
- * Complex 0 = 0 + 0i
- */
-val ZERO = Complex(0.0, 0.0)
-/**
- * Complex 1 = 1 + 0i
- */
-val ONE = Complex(1.0, 0.0)
+
 /**
  * Complex unit = 0 + i
  */
@@ -73,7 +66,7 @@ fun cot(c: Complex) = cos(c) / sin(c)
 /**
  * Complex secant
  */
-fun sec(c: Complex) = ONE / cos(c)
+fun sec(c: Complex) = Complex.ONE / cos(c)
 
 /**
  * The natural logarithm on the principal branch
@@ -86,7 +79,7 @@ operator fun Number.minus(c: Complex) = Complex(this.toDouble() - c.real, -c.img
 
 operator fun Number.times(c: Complex) = Complex(this.toDouble() * c.real, this.toDouble() * c.img)
 
-operator fun Number.div(c: Complex) = ONE / c
+operator fun Number.div(c: Complex) = Complex.ONE / c
 
 /**
  * Defines complex numbers and their algebraic operations
@@ -123,6 +116,9 @@ class Complex(val real: Double, val img: Double) {
 
     operator fun div(c: Complex): Complex {
         val den = c.normSquared()
+        if (isPracticallyZero(den)) {
+            return this / 0 //TO make this consistent with division by zero number
+        }
         val num = this * c.conjugate()
         return num / den
     }
@@ -159,6 +155,15 @@ class Complex(val real: Double, val img: Double) {
     private fun isPracticallyZero(d: Double) = abs(d) < DEFAULT_TOLERANCE
 
     companion object {
+        /**
+         * Complex 0 = 0 + 0i
+         */
+        val ZERO = Complex(0.0, 0.0)
+        /**
+         * Complex 1 = 1 + 0i
+         */
+        val ONE = Complex(1.0, 0.0)
+
         const val DEFAULT_TOLERANCE = 1.0E-15
         fun fromNumber(n: Number) = Complex(n.toDouble(), 0.0)
     }

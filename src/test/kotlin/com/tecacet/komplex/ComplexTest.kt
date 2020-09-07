@@ -1,5 +1,7 @@
 package com.tecacet.komplex
 
+import com.tecacet.komplex.Complex.Companion.ONE
+import com.tecacet.komplex.Complex.Companion.ZERO
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import kotlin.math.PI
@@ -94,6 +96,14 @@ internal class ComplexTest {
     }
 
     @Test
+    fun testMultiplyByZero() {
+        val c = Complex(1, -1)
+        assertEquals(ZERO, 0 * c)
+        assertEquals(ZERO, c * 0.0)
+        assertEquals(ZERO, c * ZERO)
+    }
+
+    @Test
     fun testDivision() {
         val c1 = Complex(3.0, -2.5)
         var c2 = c1 / 2.0
@@ -109,9 +119,14 @@ internal class ComplexTest {
     @Test
     fun testDivideByZero() {
         val c1 = Complex(3.0, -2.5)
-        val c2 = c1 / 0
-        assertEquals(Double.POSITIVE_INFINITY, c2.real)
-        assertEquals(Double.NEGATIVE_INFINITY, c2.img)
+        val div1 = c1 / 0
+        assertEquals(Double.POSITIVE_INFINITY, div1.real)
+        assertEquals(Double.NEGATIVE_INFINITY, div1.img)
+
+        val c2 = Complex(-3.0, 2.5)
+        val div2 = c2 / ZERO
+        assertEquals(Double.NEGATIVE_INFINITY, div2.real)
+        assertEquals(Double.POSITIVE_INFINITY, div2.img)
     }
 
     @Test
@@ -185,5 +200,7 @@ internal class ComplexTest {
 
         assertEquals(-0.004219778905924383+0.10914868894792414 * i, (1 + 2*i)to 2*i)
     }
+
+
 
 }
