@@ -91,6 +91,17 @@ internal class ComplexPolynomialTest {
 
         val p3 = p2 / i
         assertEquals("(1.0)+(-1.0i)z", p3.toString())
+
+        //now divide p1 into p2
+        val (a, b) = p2 / p1
+        assertEquals(ComplexPolynomial.ZERO, a)
+        assertEquals(p2, b)
+
+        //try something harder
+        val dividend = ComplexPolynomial(Complex.ONE, Complex.ZERO, -3 * i, 2 + i)
+        val divisor = ComplexPolynomial(Complex.ONE, -1 + i)
+        val (quotient, remainder) = dividend / divisor
+        assertEquals(dividend, quotient * divisor + remainder)
     }
 
     @Test
@@ -104,7 +115,7 @@ internal class ComplexPolynomialTest {
 
     @Test
     fun testDerivative() {
-        val p = ComplexPolynomial.of(2.0, 1.0, 3.0, 4.0)
+        val p = 2 + Z + 3 * (Z to 2) + 4 * (Z to 3)
         assertEquals(3, p.degree)
         val dp = p.derivative()
         assertEquals(2, dp.degree)
