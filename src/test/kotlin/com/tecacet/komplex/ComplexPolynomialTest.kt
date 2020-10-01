@@ -150,6 +150,27 @@ internal class ComplexPolynomialTest {
                 p3.toString())
     }
 
+    @Test
+    fun testIsMonomial() {
+        val m1 = ComplexPolynomial.monomial(10, 8*i)
+        assertTrue(m1.isMonomial())
+        val m2 = ComplexPolynomial.monomial(5, 1+i)
+        assertTrue(m2.isMonomial())
+        val p = m1 + m2
+        assertFalse(p.isMonomial())
+    }
+
+    @Test
+    fun testMonomialPower() {
+        val m = ComplexPolynomial.monomial(2, 2)
+        assertEquals(2, m.degree)
+        val m5 = m to 5
+        assertTrue(m.isMonomial())
+        assertEquals(10, m5.degree)
+        assertEquals("(2.0)z^10", m5.toString())
+
+    }
+
     private fun verifyCoefficients(expected: List<Complex>, p: ComplexPolynomial) {
         (0..p.degree).forEach { assertEquals(expected[it], p[it]) }
     }

@@ -55,6 +55,8 @@ class ComplexPolynomial(vararg coefficients: Complex) {
             return ComplexPolynomial(*a)
         }
 
+        fun monomial(degree: Int, number : Number) = monomial(degree, Complex(number, 0))
+
         /**
          * Create coefficients complex polynomial with real coefficients
          * @param coefficients the polynomial coefficients
@@ -214,6 +216,10 @@ class ComplexPolynomial(vararg coefficients: Complex) {
         if (exponent == 1){
             return this
         }
+        if (this.isMonomial()) {
+            val deg = this.degree * exponent
+            return monomial(deg, coefficients[degree])
+        }
         val half = to(exponent / 2)
         return if (isEven(exponent)) {
             half * half
@@ -221,4 +227,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
             half * half * this
         }
     }
+
+    fun isMonomial() = (0 until  degree).map { coefficients[it] }.all { it.isZero(TOLERANCE) }
+
 }
