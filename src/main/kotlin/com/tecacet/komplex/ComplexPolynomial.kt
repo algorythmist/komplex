@@ -89,6 +89,8 @@ class ComplexPolynomial(vararg coefficients: Complex) {
         return v
     }
 
+    operator fun invoke(n : Number) = invoke(Complex.fromNumber(n))
+
     val degree get() = coefficients.size - 1
 
     /**

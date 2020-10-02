@@ -25,6 +25,9 @@ internal class ComplexPolynomialTest {
         assertEquals(0.21, real, 0.00001)
         assertEquals(-2.3, img, 0.00001)
 
+        val (r2, i2) = p(2)
+        assertEquals(5.0, r2, 0.00001)
+        assertEquals(3.0, i2, 0.00001)
     }
 
     @Test
