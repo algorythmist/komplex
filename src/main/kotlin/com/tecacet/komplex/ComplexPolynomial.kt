@@ -8,6 +8,8 @@ operator fun Complex.times(cp: ComplexPolynomial) = cp * this
 
 operator fun Number.plus(cp: ComplexPolynomial) = cp + this.toDouble()
 
+operator fun Complex.plus(cp : ComplexPolynomial) = cp + this
+
 /**
  * a complex polynomial of the form c[0] + c[1]z + c[2]z^2 + ...
  * where the c's are complex numbers
@@ -55,6 +57,8 @@ class ComplexPolynomial(vararg coefficients: Complex) {
             return ComplexPolynomial(*a)
         }
 
+        fun monomial(degree: Int, number : Number) = monomial(degree, Complex(number, 0))
+
         /**
          * Create coefficients complex polynomial with real coefficients
          * @param coefficients the polynomial coefficients
@@ -84,6 +88,8 @@ class ComplexPolynomial(vararg coefficients: Complex) {
         }
         return v
     }
+
+    operator fun invoke(n : Number) = invoke(Complex.fromNumber(n))
 
     val degree get() = coefficients.size - 1
 
@@ -139,11 +145,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
         return ComplexPolynomial(*coeff)
     }
 
-    operator fun minus(c : Complex) : ComplexPolynomial {
-        val coeff = this.coefficients.copyOf()
-        coeff[0] = coeff[0] - c
-        return ComplexPolynomial(*coeff)
-    }
+    operator fun minus(c : Complex) = this.plus(-c)
 
     /**
      * Add two polynomials
@@ -214,6 +216,10 @@ class ComplexPolynomial(vararg coefficients: Complex) {
         if (exponent == 1){
             return this
         }
+        if (this.isMonomial()) {
+            val deg = this.degree * exponent
+            return monomial(deg, coefficients[degree])
+        }
         val half = to(exponent / 2)
         return if (isEven(exponent)) {
             half * half
@@ -221,4 +227,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
             half * half * this
         }
     }
+
+    fun isMonomial() = (0 until  degree).map { coefficients[it] }.all { it.isZero(TOLERANCE) }
+
 }
