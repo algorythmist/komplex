@@ -73,6 +73,12 @@ fun sec(c: Complex) = Complex.ONE / cos(c)
  */
 fun ln(c: Complex) = Complex(ln(c.abs()), c.phase())
 
+/**
+ * Roots of unity
+ */
+fun roots(n: Int) =
+    (1 ..n).map { exp(i*2*PI*it/n) }
+
 operator fun Number.plus(c: Complex) = Complex(this.toDouble() + c.real, c.img)
 
 operator fun Number.minus(c: Complex) = Complex(this.toDouble() - c.real, -c.img)
@@ -165,7 +171,11 @@ class Complex(val real: Double, val img: Double) {
         val ONE = Complex(1.0, 0.0)
 
         const val DEFAULT_TOLERANCE = 1.0E-15
+
         fun fromNumber(n: Number) = Complex(n.toDouble(), 0.0)
+
+        fun fromPolar(radius: Double, theta: Double) :Complex  =radius*exp(i*theta)
+
     }
 
     /**
