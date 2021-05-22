@@ -16,7 +16,7 @@
     <properties>
         <kotlin.version>1.5.0-M2</kotlin.version>
         <jupiter.version>5.7.2</jupiter.version>
-        <dokka.version>1.4.10.2</dokka.version>
+        <dokka.version>0.10.1</dokka.version>
         <nexus-staging.version>1.6.8</nexus-staging.version>
         <maven-source.version>3.2.1</maven-source.version>
         <maven-gpg.version>1.6</maven-gpg.version>
