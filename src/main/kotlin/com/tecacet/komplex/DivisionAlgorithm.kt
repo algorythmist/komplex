@@ -47,5 +47,5 @@ fun gcd(f: ComplexPolynomial,
  * @return true if the polynomial is null
  */
 private fun isZero(p: ComplexPolynomial): Boolean {
-    return p.degree == 0 && p[0] == ZERO // TODO zero comparison
+    return p.degree == 0 && p[0].isZero(Complex.DEFAULT_TOLERANCE)
 }

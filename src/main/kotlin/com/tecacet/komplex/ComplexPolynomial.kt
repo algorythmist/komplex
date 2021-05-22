@@ -1,8 +1,14 @@
 package com.tecacet.komplex
 
+val Z = ComplexPolynomial.of(0.0, 1.0)
+
 operator fun Number.times(cp: ComplexPolynomial) = cp * this.toDouble()
 
 operator fun Complex.times(cp: ComplexPolynomial) = cp * this
+
+operator fun Number.plus(cp: ComplexPolynomial) = cp + this.toDouble()
+
+operator fun Complex.plus(cp : ComplexPolynomial) = cp + this
 
 /**
  * a complex polynomial of the form c[0] + c[1]z + c[2]z^2 + ...
@@ -28,7 +34,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
     constructor(cp: ComplexPolynomial) : this(*cp.coefficients)
 
     companion object {
-        val ZERO = ComplexPolynomial(com.tecacet.komplex.ZERO)
+        val ZERO = ComplexPolynomial(Complex.ZERO)
 
         /**
          * Create the constant polynomial
@@ -46,16 +52,19 @@ class ComplexPolynomial(vararg coefficients: Complex) {
          * @param coefficient the multiplier of the monomial
          */
         fun monomial(degree: Int, coefficient: Complex): ComplexPolynomial {
-            val a = Array(degree + 1) { _ -> com.tecacet.komplex.ZERO }
+            val a = Array(degree + 1) { Complex.ZERO }
             a[degree] = coefficient
             return ComplexPolynomial(*a)
         }
+
+        fun monomial(degree: Int, number : Number) = monomial(degree, Complex(number, 0))
 
         /**
          * Create coefficients complex polynomial with real coefficients
          * @param coefficients the polynomial coefficients
          */
-        fun of(coefficients: DoubleArray) = ComplexPolynomial(*(coefficients.map { Complex.fromNumber(it) }.toTypedArray()))
+
+        fun of(vararg coefficients: Double) = ComplexPolynomial(*(coefficients.map { Complex.fromNumber(it) }.toTypedArray()))
     }
 
     override fun equals(other: Any?): Boolean {
@@ -78,8 +87,9 @@ class ComplexPolynomial(vararg coefficients: Complex) {
             powx *= z
         }
         return v
-
     }
+
+    operator fun invoke(n : Number) = invoke(Complex.fromNumber(n))
 
     val degree get() = coefficients.size - 1
 
@@ -104,7 +114,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
             }
         }
 
-        return (0 until coefficients.size).map { coefficientToString(it) }.filter { !it.isEmpty() }.joinToString(separator = "+")
+        return (coefficients.indices).map { coefficientToString(it) }.filter { !it.isEmpty() }.joinToString(separator = "+")
     }
 
     operator fun unaryMinus() = ComplexPolynomial(*coefficients.map { c -> -c }.toTypedArray())
@@ -116,6 +126,26 @@ class ComplexPolynomial(vararg coefficients: Complex) {
     operator fun div(z: Complex) = ComplexPolynomial(*coefficients.map { c -> c / z }.toTypedArray())
 
     operator fun div(n: Number) = ComplexPolynomial(*coefficients.map { c -> c / n }.toTypedArray())
+
+    operator fun plus(n : Number) : ComplexPolynomial {
+        val coeff = this.coefficients.copyOf()
+        coeff[0] = coeff[0] + n
+        return ComplexPolynomial(*coeff)
+    }
+
+    operator fun plus(c : Complex) : ComplexPolynomial {
+        val coeff = this.coefficients.copyOf()
+        coeff[0] = coeff[0] + c
+        return ComplexPolynomial(*coeff)
+    }
+
+    operator fun minus(n : Number) : ComplexPolynomial {
+        val coeff = this.coefficients.copyOf()
+        coeff[0] = coeff[0] - n
+        return ComplexPolynomial(*coeff)
+    }
+
+    operator fun minus(c : Complex) = this.plus(-c)
 
     /**
      * Add two polynomials
@@ -159,7 +189,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
     operator fun times(other: ComplexPolynomial): ComplexPolynomial {
         val resultOrder = degree + other.degree
 
-        val coeff = Array(resultOrder + 1, { _ -> Complex.fromNumber(0) })
+        val coeff = Array(resultOrder + 1, { Complex.fromNumber(0) })
         for (k in 0 until coefficients.size) {
             for (j in 0 until other.coefficients.size) {
                 coeff[k + j] += coefficients[k] * other.coefficients[j]
@@ -172,6 +202,32 @@ class ComplexPolynomial(vararg coefficients: Complex) {
         return divide(this, other)
     }
 
+    fun derivative() : ComplexPolynomial {
+        val d = (1..degree).map { coefficients[it]*it }.toTypedArray()
+        return ComplexPolynomial(*d)
+    }
+
     private fun isZero() = degree == 0 && coefficients[0].isZero(TOLERANCE)
+
+    infix fun to(exponent: Int): ComplexPolynomial {
+        if (exponent == 0 ) {
+            return ZERO
+        }
+        if (exponent == 1){
+            return this
+        }
+        if (this.isMonomial()) {
+            val deg = this.degree * exponent
+            return monomial(deg, coefficients[degree])
+        }
+        val half = to(exponent / 2)
+        return if (isEven(exponent)) {
+            half * half
+        } else {
+            half * half * this
+        }
+    }
+
+    fun isMonomial() = (0 until  degree).map { coefficients[it] }.all { it.isZero(TOLERANCE) }
 
 }
