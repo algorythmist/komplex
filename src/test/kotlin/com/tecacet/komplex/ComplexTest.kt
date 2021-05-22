@@ -135,6 +135,10 @@ internal class ComplexTest {
         assertEquals(5.0, c1.abs())
         assertEquals(5.0, abs(c1))
         assertEquals(-0.9273, c1.phase(), 0.001)
+
+        val c2 = Complex.fromPolar(5.0, -0.9273)
+        assertEquals(c1.real, c2.real, 0.0001)
+        assertEquals(c1.img, c2.img, 0.0001)
     }
 
     @Test
@@ -198,9 +202,16 @@ internal class ComplexTest {
         val c9 = c to 9
         assertEquals("-1.40234375-2.341796875i", c9.toString())
 
-        assertEquals(-0.004219778905924383+0.10914868894792414 * i, (1 + 2*i)to 2*i)
+        assertEquals(-0.004219778905924383 + 0.10914868894792414 * i, (1 + 2 * i) to 2 * i)
     }
 
 
-
+    @Test
+    fun testRoots() {
+        val roots3 = roots(3)
+        assertEquals(3, roots3.size)
+        roots3.map { it to 3 }.forEach { assertEquals(1.0, it.abs(), 000.1) }
+        val roots5 = roots(5)
+        roots5.map { it to 5 }.forEach { assertEquals(1.0, it.abs(), 000.1) }
+    }
 }

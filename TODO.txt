@@ -3,4 +3,3 @@
 - fix polynomial equals/hashCode
 - complex sqrt
 - FFT
-- roots of unity
