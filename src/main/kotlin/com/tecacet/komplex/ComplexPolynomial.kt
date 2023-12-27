@@ -161,7 +161,7 @@ class ComplexPolynomial(vararg coefficients: Complex) {
         }
 
         val maxOrder = maxOf(degree, other.degree)
-        val coeff = Array<Complex>(maxOrder + 1, { addCoefficient(it) })
+        val coeff = Array(maxOrder + 1) { addCoefficient(it) }
         return ComplexPolynomial(*coeff)
     }
 
