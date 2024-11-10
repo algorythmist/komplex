@@ -4,8 +4,10 @@ package com.tecacet.komplex
  * Division of polynomials using Euclid's algorithm
  * @return the quotient and remainder as a pair
  */
-fun divide(dividend: ComplexPolynomial,
-           divisor: ComplexPolynomial): Pair<ComplexPolynomial, ComplexPolynomial> {
+fun divide(
+    dividend: ComplexPolynomial,
+    divisor: ComplexPolynomial
+): Pair<ComplexPolynomial, ComplexPolynomial> {
 
     var quotient = ComplexPolynomial.ZERO
     var remainder = dividend
@@ -29,8 +31,10 @@ fun divide(dividend: ComplexPolynomial,
  * @param g a polynomial
  * @return The largest polynomial that divides both f and g
  */
-fun gcd(f: ComplexPolynomial,
-        g: ComplexPolynomial): ComplexPolynomial {
+fun gcd(
+    f: ComplexPolynomial,
+    g: ComplexPolynomial
+): ComplexPolynomial {
     var gcd = ComplexPolynomial(f)
     var s = ComplexPolynomial(g)
     while (!isZero(s)) {
