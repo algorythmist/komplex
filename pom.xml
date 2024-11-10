@@ -6,7 +6,7 @@
 
     <groupId>com.tecacet</groupId>
     <artifactId>komplex</artifactId>
-    <version>1.2.1-SNAPSHOT</version>
+    <version>1.2.2-SNAPSHOT</version>
     <name>Komplex</name>
     <description>
         A Kotlin module for performing complex number and complex polynomial operations
@@ -14,9 +14,11 @@
     <url>https://github.com/algorythmist/komplex</url>
 
     <properties>
-        <kotlin.version>1.7.0</kotlin.version>
-        <jupiter.version>5.8.2</jupiter.version>
-        <dokka.version>0.10.1</dokka.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <kotlin.version>1.9.20</kotlin.version>
+        <jupiter.version>5.11.3</jupiter.version>
+        <dokka.version>1.9.20</dokka.version>
         <nexus-staging.version>1.6.8</nexus-staging.version>
         <maven-source.version>3.2.1</maven-source.version>
         <maven-gpg.version>1.6</maven-gpg.version>
@@ -116,11 +118,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <includes>
-                        <file>packages.md</file>
-                    </includes>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
